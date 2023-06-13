@@ -12,6 +12,13 @@ Para evaluar el efecto de los distintos pSymA en el fenotipo, contruimos cepas h
 Con ese fin, diseñe un ensayo en alfalfa inoculando con las cepas a evaluar y utilizando 12 plantas por condicion. Luego de un mes y medio, se obtiene la parte aerea de las plantas y cada una se coloca en sobres para dejarlas en estufa a 65°C durante una semana. Finalmente, se registraron los pesos obtenidos en una balanza analitica.
 Ademas, dado que en la camara de plantas observamos diferencias al crecer las plantas en un estante u otro, se registraron los estantes en el que colocamos cada una de las plantas. Nos aseguramos de que por estante haya al menos 12 plantas por condicion.
 
+
+El dataset final consiste en una tabla con las siguientes columnas:
+-Estante
+-Tratamiento (cepas inoculadas): control, 2011GFP, AK21, AK83, B401, Sma(AK21), Sma(AK83), Sma(B401).
+-Peso seco (mg/planta): los pesos secos de cada planta registrados.
+
+
 ***Variables a evaluar***
    * Variable continua: peso seco de las plantas expresado en mg/planta.
    * Variable categorica: estante de la camara donde se colocaron las plantas (Estante1, Estante2).
