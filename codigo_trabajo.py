@@ -113,10 +113,54 @@ ri_SmaB401 = SmaB401.quantile(0.75, numeric_only = True) - SmaB401.quantile(0.25
 
 #DESVIACION TIPICA
 desv_total = peso_seco.std(axis=None)
-print(desv_total)
+#print(desv_total)
 #23.88598342973365
 
+desv_control = control.std(axis=None, numeric_only=True)
+desv_gfp = gfp.std(axis=None, numeric_only= True)
+desv_AK21 = AK21.std(axis=None, numeric_only=True)
+desv_AK83 = AK83.std(axis=None,  numeric_only=True)
+desv_B401 = B401.std(axis=None,  numeric_only=True)
+desv_SmaAK21 = SmaAK21.std(axis=None,  numeric_only=True)
+desv_SmaAK83 = SmaAK83.std(axis=None,  numeric_only=True)
+desv_SmaB401 = SmaB401.std(axis=None,  numeric_only=True)
 
+#print([desv_control, desv_gfp, desv_AK21, desv_AK83, desv_B401, desv_SmaAK21, desv_SmaAK83, desv_SmaB401])
+#[2.26958, 16.434463, 16.916405, 6.067446, 14.853381, 23.23896, 41.03822, 25.120062]
+
+#VARIANZA.
+
+var_total = peso_seco.var(axis=None)
+#print(var_total)
+#570?????
+
+var_control = control.var(axis=None, numeric_only=True)
+var_gfp = gfp.var(axis=None, numeric_only= True)
+var_AK21 = AK21.var(axis=None, numeric_only=True)
+var_AK83 = AK83.var(axis=None,  numeric_only=True)
+var_B401 = B401.var(axis=None,  numeric_only=True)
+var_SmaAK21 = SmaAK21.var(axis=None,  numeric_only=True)
+var_SmaAK83 = SmaAK83.var(axis=None,  numeric_only=True)
+var_SmaB401 = SmaB401.var(axis=None,  numeric_only=True)
+
+#print([var_control, var_gfp, var_AK21, var_AK83, var_B401, var_SmaAK21, var_SmaAK83, var_SmaB401])
+#[5.150996, 270.091576, 286.164764, 36.813895, 220.622925, 540.049281, 1684.135476, 631.017511]
+
+    # ''' Como no conozco la varianza poblacional y el n es menor a 30, uso dist t de student'''
+     #se utilizará la distribución t de student porque no conocemos la varianza poblacional y el n<30
+
+     #Se calcula como:
+
+     #Intervalo de confianza = x +/- t * (s / √n)
+
+'''¿Los datos se distribuyen de manera normal? Para responder utilizo el test de normalidad.
+ Planteo dos hipotesis:
+ -H0: los datos se distribuyen normalmente.
+ -H1:los datos no se distribuyen normalmente.'''
+
+print(ss.normaltest(peso_seco, axis=0, nan_policy='propagate'))
+#NormaltestResult(statistic=94.3678816604075, pvalue=3.2231080362482276e-21)}
+#el p-valor es menor a 0.05, por lo tanto rechazo la H0 y acepto la hipotesis alternativa, es decir que los datos no se distribuyen de manera normal.
 
 #%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION
 #Para eso se calcula el valor de los coeficientes que determinan la asimetria y curtosis de la distribucion.
