@@ -31,12 +31,19 @@ Los resultados obtenidos se muestran en la siguiente imagen:
 Ademas, evalue la **media**de los pesos secos para cada una de las condiciones evaluadas.
 
 >La media del peso seco del control es: Peso seco    7.936364
+
 >La media del peso seco de las muestras inoculadas con 2011GFP es: Peso seco    38.7125
+
 >La media del peso seco de las muestras inoculadas con AK21 es: Peso seco    35.629167
+
 >La media del peso seco de las muestras inoculadas con AK83 es Peso seco    19.354167
+
 >La media del peso seco de las muestras inoculadas con B401 es Peso seco    29.273913
+
 >La media del peso seco de las muestras inoculadas con Sma(AK21) es: Peso seco    35.629167
+
 >La media del peso seco de las muestras inoculadas con Sma(AK83) es: Peso seco    19.354167
+
 >La media del peso seco de las muestras inoculadas con Sma(B401) es: Peso seco    29.273913
 
 2) ***ASIMETRIA Y CURTOSIS***
