@@ -13,8 +13,19 @@ Con ese fin, diseñe un ensayo en alfalfa inoculando con las cepas a evaluar y u
 Ademas, dado que en la camara de plantas observamos diferencias al crecer las plantas en un estante u otro, se registraron los estantes en el que colocamos cada una de las plantas. Nos aseguramos de que por estante haya al menos 12 plantas por condicion.
 
 ***Variables a evaluar***
-   * Variable continua: peso seco de las plantas expresado en gr/planta.
-   * Variable categorica: estante de la camara donde se colocaron las plantas (Estante1, Estante2, Estante3).
+   * Variable continua: peso seco de las plantas expresado en mg/planta.
+   * Variable categorica: estante de la camara donde se colocaron las plantas (Estante1, Estante2).
+
+
+1) ***DISTRIBUCION DE LOS DATOS***
+
+Primero, evalue como se distribuyen los datos del peso seco. Para eso, filtre los datos de la columna peso seco y los grafique utilizando la biblioteca mathplotlib.
+
+<img src="./histograma_peso_seco.png" 
+     width="50%" 
+     height=auto />
+
+
 
 
 
