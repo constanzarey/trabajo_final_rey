@@ -12,17 +12,20 @@ path = './Peso_seco.xlsx'
 datos = pd.read_excel(path, sheet_name = 'Hoja4')
 #print(datos)
 datos_final = datos.dropna()
-filtrado = datos_final[datos_final['Estante']== 'Estante1']
 #print(filtrado)
 
-#%% ¿COMO SE DISTRIBUYEN LOS DATOS?
-#visualizar como se distribuyen los datos.
+#%% ¿COMO SE DISTRIBUYEN LOS DATOS? MEDIDAS CARACTERISTICAS DE UNA DISTRIBUCION.
+#visualizar como se distribuyen los datos totales.
 peso_seco = datos_final['Peso seco'].dropna()
 plt.hist(peso_seco, bins=50)  
-plt.title('Histograma de peso seco')  # Título del histograma
+plt.title('Histograma de peso seco total')  # Título del histograma
 plt.xlabel('Peso seco (mg/planta)')  # Etiqueta del eje x
 plt.ylabel('Frecuencia')
 plt.show()
+
+#Descripcion de los datos totales.
+
+descripcion_estadistica = peso_seco.describe()
 
 control = datos_final[datos_final['Tratamiento']== 'control']
 gfp = datos_final[datos_final['Tratamiento']== '2011 GFP']
@@ -33,30 +36,74 @@ SmaAK21 = datos_final[datos_final['Tratamiento']== 'SmaAK21']
 SmaAK83 = datos_final[datos_final['Tratamiento']== 'SmaAK83']
 SmaB401 = datos_final[datos_final['Tratamiento']== 'SmaB401']
 
-#medias
 
-media_control = control.mean()
-media_gfp = gfp.mean()
-media_AK21 = AK21.mean()
-media_AK83 = AK83.mean()
-media_B401 = B401.mean()
-media_SmaAK21 = SmaAK21.mean()
-media_SmaAK83 = SmaAK83.mean()
-media_SmaB401 = SmaB401.mean()
-
-print('La media del peso seco del control es:', media_control, 
-      'La media del peso seco de las muestras inoculadas con 2011GFP es:' , media_gfp,
-      'La media del peso seco de las muestras inoculadas con AK21 es:', media_AK21,
-      'La media del peso seco de las muestras inoculadas con AK83 es', media_AK83,
-      'La media del peso seco de las muestras inoculadas con B401 es', media_B401,
-      'La media del peso seco de las muestras inoculadas con Sma(AK21) es:' ,media_AK21,
-      'La media del peso seco de las muestras inoculadas con Sma(AK83) es:', media_AK83,
-      'La media del peso seco de las muestras inoculadas con Sma(B401) es:', media_B401
-      )
-
+#Evaluacion de parametros de centralizacion de la distribucion.
+#MEDIA
+media_control = control.mean(numeric_only=True)
+#7.936364
+media_gfp = gfp.mean(numeric_only=True)
+#38.7125
+media_AK21 = AK21.mean(numeric_only=True)
+#35.629167
+media_AK83 = AK83.mean(numeric_only=True)
+#19.354167
+media_B401 = B401.mean(numeric_only=True)
+#29.273913
+media_SmaAK21 = SmaAK21.mean(numeric_only=True)
+#35.629167
+media_SmaAK83 = SmaAK83.mean(numeric_only=True)
+#19.354167
+media_SmaB401 = SmaB401.mean(numeric_only=True)
+#29.273913
 
 
-#%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION.control = datos_final[datos_final['Tratamiento']== 'control']
+
+#Evaluacion de la mediana de los datos para cada condicion.
+
+mediana_control = control.median(numeric_only=True)
+#8.4
+mediana_gfp = gfp.median(numeric_only=True)
+#38.4
+mediana_AK21 = AK21.median(numeric_only=True)
+#33.8
+mediana_AK83 = AK83.median(numeric_only=True)
+#19.4
+mediana_B401 = B401.median(numeric_only=True)
+#25.1
+mediana_SmaAK21 = SmaAK21.median(numeric_only=True)
+#33.8
+mediana_SmaAK83 = SmaAK83.median(numeric_only=True)
+#19.4
+mediana_SmaB401 = SmaB401.median(numeric_only=True)
+#25.1
+
+
+#Evaluacion de la moda de los datos para cada condicion.
+#chequear si me anda
+moda_control = control.mode(numeric_only=True)
+moda_gfp = gfp.mode(numeric_only=True)
+moda_AK21 = AK21.mode(numeric_only=True)
+moda_AK83 = AK83.mode(numeric_only=True)
+moda_B401 = B401.mode(numeric_only=True)
+moda_SmaAK21 = SmaAK21.mode(numeric_only=True)
+moda_SmaAK83 = SmaAK83.mode(numeric_only=True)
+moda_SmaB401 = SmaB401.mode(numeric_only=True)
+
+#Parametros de dispersion.
+
+ri_total = peso_seco.quantile(0.75) - peso_seco.quantile(0.25)
+#print(ri_total)
+#24.799999999999997 (especifica el rango de valores)
+
+ri_control = control.quantile(0.75, numeric_only = True) - control.quantile(0.25, numeric_only = True)
+#print(ri_control)
+#3.5
+ri_gfp = gfp.quantile(0.75, numeric_only = True) - gfp.quantile(0.25, numeric_only = True)
+#print(ri_gfp)
+#25.6
+
+
+#%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION
 #Para eso se calcula el valor de los coeficientes que determinan la asimetria y curtosis de la distribucion.
 #ASIMETRIA
 
@@ -70,4 +117,6 @@ print(kurtosis)
 #7.103412786645373
 #Un coeficiente de curtosis menor a 0 indica que el histograma tiende a un gran apuntamiento alrededor del valor central, lo que corresponde a una distribución leptocurtica.
 
-#%% ESTIMACION DE INTERVALOS DE CONFIANZA.
+#%% ESTIMACION DE INTERVALOS DE CONFIANZA
+
+
