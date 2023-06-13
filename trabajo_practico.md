@@ -35,6 +35,17 @@ Luego, analice la asimetria y curtosis de la distribucion de datos. Para eso, ca
 
 >El coeficiente de curtosis dio un valor de 7.103412786645373, lo cual indica que la distribución es **leptocurtica**.
 
+PReguntas
+!!!!!1
+
+para hacer describe necesito filtrar cada una de las condiciones???
+
+
+
+3) ***ESTIMACION DE INTERVALOS DE CONFIANZA***
+
+
+
 
 
 

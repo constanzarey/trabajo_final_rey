@@ -24,6 +24,10 @@ plt.xlabel('Peso seco (mg/planta)')  # Etiqueta del eje x
 plt.ylabel('Frecuencia')
 plt.show()
 
+descripcion = datos_final.describe()
+print(descripcion)
+
+
 #%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION.
 #Para eso se calcula el valor de los coeficientes que determinan la asimetria y curtosis de la distribucion.
 #ASIMETRIA
