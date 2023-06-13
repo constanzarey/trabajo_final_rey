@@ -17,7 +17,7 @@ Ademas, dado que en la camara de plantas observamos diferencias al crecer las pl
    * Variable categorica: estante de la camara donde se colocaron las plantas (Estante1, Estante2).
 
 
-1) ***DISTRIBUCION DE LOS DATOS***
+1) ***DISTRIBUCION Y DESCRIPCION DE LOS DATOS***
 
 Primero, evalue como se distribuyen los datos del peso seco. Para eso, filtre los datos de la columna peso seco y los grafique utilizando la biblioteca mathplotlib.
 
@@ -26,6 +26,18 @@ Los resultados obtenidos se muestran en la siguiente imagen:
 <img src="./histograma_peso_seco.png" 
      width="50%" 
      height=auto />
+
+
+Ademas, evalue la **media**de los pesos secos para cada una de las condiciones evaluadas.
+
+>La media del peso seco del control es: Peso seco    7.936364
+>La media del peso seco de las muestras inoculadas con 2011GFP es: Peso seco    38.7125
+>La media del peso seco de las muestras inoculadas con AK21 es: Peso seco    35.629167
+>La media del peso seco de las muestras inoculadas con AK83 es Peso seco    19.354167
+>La media del peso seco de las muestras inoculadas con B401 es Peso seco    29.273913
+>La media del peso seco de las muestras inoculadas con Sma(AK21) es: Peso seco    35.629167
+>La media del peso seco de las muestras inoculadas con Sma(AK83) es: Peso seco    19.354167
+>La media del peso seco de las muestras inoculadas con Sma(B401) es: Peso seco    29.273913
 
 2) ***ASIMETRIA Y CURTOSIS***
 
@@ -39,6 +51,7 @@ PReguntas
 !!!!!1
 
 para hacer describe necesito filtrar cada una de las condiciones???
+
 
 
 
