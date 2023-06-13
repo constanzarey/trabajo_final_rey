@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 #%% FILTRADO DE DATOS DEL DATASET
 path = './Peso_seco.xlsx'
-datos = pd.read_excel(path, sheet_name = 'Hoja3')
+datos = pd.read_excel(path, sheet_name = 'Hoja4')
 #print(datos)
 datos_final = datos.dropna()
 filtrado = datos_final[datos_final['Estante']== 'Estante1']
@@ -18,9 +18,9 @@ filtrado = datos_final[datos_final['Estante']== 'Estante1']
 #%% ¿COMO SE DISTRIBUYEN LOS DATOS?
 #visualizar como se distribuyen los datos.
 peso_seco = datos_final['Peso seco'].dropna()
-plt.hist(peso_seco, bins=10)  
+plt.hist(peso_seco, bins=50)  
 plt.title('Histograma de peso seco')  # Título del histograma
-plt.xlabel('Peso seco (gr/planta)')  # Etiqueta del eje x
+plt.xlabel('Peso seco (mg/planta)')  # Etiqueta del eje x
 plt.ylabel('Frecuencia')
 plt.show()
 
@@ -30,10 +30,12 @@ plt.show()
 
 skewness = peso_seco.skew(axis=0, skipna=True, numeric_only=False)
 print(skewness)
-#0.1745536156801608
+#2.027382050998325
 #Un coeficiente de asimetria de Fisher mayor a cero indica asimetria positiva.
 
 kurtosis = peso_seco.kurt(axis=0, skipna=True, numeric_only=False)
 print(kurtosis)
-#-0.7593116032768186
-#Un coeficiente de curtosis menor a 0 indica que el histograma tiende a ser aplanado, lo que corresponde a una distribución platicúrtica.
+#7.103412786645373
+#Un coeficiente de curtosis menor a 0 indica que el histograma tiende a un gran apuntamiento alrededor del valor central, lo que corresponde a una distribución leptocurtica.
+
+#%% ESTIMACION DE INTERVALOS DE CONFIANZA.
