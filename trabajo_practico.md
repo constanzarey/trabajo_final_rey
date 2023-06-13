@@ -22,6 +22,7 @@ Ademas, dado que en la camara de plantas observamos diferencias al crecer las pl
 Primero, evalue como se distribuyen los datos del peso seco. Para eso, filtre los datos de la columna peso seco y los grafique utilizando la biblioteca mathplotlib.
 
 Los resultados obtenidos se muestran en la siguiente imagen:
+
 <img src="./histograma_peso_seco.png" 
      width="50%" 
      height=auto />
