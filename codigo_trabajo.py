@@ -21,7 +21,7 @@ plt.hist(peso_seco, bins=50)
 plt.title('Histograma de peso seco total')  # Título del histograma
 plt.xlabel('Peso seco (mg/planta)')  # Etiqueta del eje x
 plt.ylabel('Frecuencia')
-plt.show()
+#plt.show()
 
 #Descripcion de los datos totales.
 
@@ -32,9 +32,9 @@ gfp = datos_final[datos_final['Tratamiento']== '2011 GFP']
 AK21 = datos_final[datos_final['Tratamiento']== 'AK21']
 AK83 = datos_final[datos_final['Tratamiento']== 'AK83']
 B401 = datos_final[datos_final['Tratamiento']== 'B401']
-SmaAK21 = datos_final[datos_final['Tratamiento']== 'SmaAK21']
-SmaAK83 = datos_final[datos_final['Tratamiento']== 'SmaAK83']
-SmaB401 = datos_final[datos_final['Tratamiento']== 'SmaB401']
+SmaAK21 = datos_final[datos_final['Tratamiento']== 'Sma(AK21)']
+SmaAK83 = datos_final[datos_final['Tratamiento']== 'Sma(AK83)']
+SmaB401 = datos_final[datos_final['Tratamiento']== 'Sma(B401)']
 
 
 #Evaluacion de parametros de centralizacion de la distribucion.
@@ -50,12 +50,11 @@ media_AK83 = AK83.mean(numeric_only=True)
 media_B401 = B401.mean(numeric_only=True)
 #29.273913
 media_SmaAK21 = SmaAK21.mean(numeric_only=True)
-#35.629167
+#35.211111
 media_SmaAK83 = SmaAK83.mean(numeric_only=True)
-#19.354167
+#45.538095
 media_SmaB401 = SmaB401.mean(numeric_only=True)
-#29.273913
-
+#45.631818
 
 
 #Evaluacion de la mediana de los datos para cada condicion.
@@ -71,11 +70,11 @@ mediana_AK83 = AK83.median(numeric_only=True)
 mediana_B401 = B401.median(numeric_only=True)
 #25.1
 mediana_SmaAK21 = SmaAK21.median(numeric_only=True)
-#33.8
+#27.1
 mediana_SmaAK83 = SmaAK83.median(numeric_only=True)
-#19.4
+#26.2
 mediana_SmaB401 = SmaB401.median(numeric_only=True)
-#25.1
+#39.65
 
 
 #Evaluacion de la moda de los datos para cada condicion.
@@ -92,15 +91,31 @@ moda_SmaB401 = SmaB401.mode(numeric_only=True)
 #Parametros de dispersion.
 
 ri_total = peso_seco.quantile(0.75) - peso_seco.quantile(0.25)
-#print(ri_total)
 #24.799999999999997 (especifica el rango de valores)
 
 ri_control = control.quantile(0.75, numeric_only = True) - control.quantile(0.25, numeric_only = True)
-#print(ri_control)
 #3.5
 ri_gfp = gfp.quantile(0.75, numeric_only = True) - gfp.quantile(0.25, numeric_only = True)
-#print(ri_gfp)
 #25.6
+ri_AK21 = AK21.quantile(0.75, numeric_only = True) - AK21.quantile(0.25, numeric_only = True)
+#19.025
+ri_AK83 = AK83.quantile(0.75, numeric_only = True) - AK83.quantile(0.25, numeric_only = True)
+#7.525
+ri_B401 = B401.quantile(0.75, numeric_only = True) - B401.quantile(0.25, numeric_only = True)
+#16.35
+ri_SmaAK21 = SmaAK21.quantile(0.75, numeric_only = True) - SmaAK21.quantile(0.25, numeric_only = True)
+#24.65
+ri_SmaAK83 = SmaAK83.quantile(0.75, numeric_only = True) - SmaAK83.quantile(0.25, numeric_only = True)
+#51.5
+ri_SmaB401 = SmaB401.quantile(0.75, numeric_only = True) - SmaB401.quantile(0.25, numeric_only = True)
+#26.725
+
+
+#DESVIACION TIPICA
+desv_total = peso_seco.std(axis=None)
+print(desv_total)
+#23.88598342973365
+
 
 
 #%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION
