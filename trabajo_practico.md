@@ -21,10 +21,18 @@ Ademas, dado que en la camara de plantas observamos diferencias al crecer las pl
 
 Primero, evalue como se distribuyen los datos del peso seco. Para eso, filtre los datos de la columna peso seco y los grafique utilizando la biblioteca mathplotlib.
 
+Los resultados obtenidos se muestran en la siguiente imagen:
 <img src="./histograma_peso_seco.png" 
      width="50%" 
      height=auto />
 
+2) ***ASIMETRIA Y CURTOSIS***
+
+Luego, analice la asimetria y curtosis de la distribucion de datos. Para eso, calcule el coeficiente de asimetria de Fisher y el coeficiente de curtosis.
+
+>El coeficiente de asimetria de Fisher dio un valor de 2.027382050998325. Esto indica que la distribucion de los datos presenta una **asimetria positiva**.
+
+>El coeficiente de curtosis dio un valor de 7.103412786645373, lo cual indica que la distribución es **leptocurtica**.
 
 
 
