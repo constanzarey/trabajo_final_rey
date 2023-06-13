@@ -14,9 +14,9 @@ Ademas, dado que en la camara de plantas observamos diferencias al crecer las pl
 
 
 El dataset final consiste en una tabla con las siguientes columnas:
--Estante
--Tratamiento (cepas inoculadas): control, 2011GFP, AK21, AK83, B401, Sma(AK21), Sma(AK83), Sma(B401).
--Peso seco (mg/planta): los pesos secos de cada planta registrados.
+* Estante
+* Tratamiento (cepas inoculadas): control, 2011GFP, AK21, AK83, B401, Sma(AK21), Sma(AK83), Sma(B401).
+* Peso seco (mg/planta): los pesos secos de cada planta registrados.
 
 
 ***Variables a evaluar***
