@@ -24,11 +24,39 @@ plt.xlabel('Peso seco (mg/planta)')  # Etiqueta del eje x
 plt.ylabel('Frecuencia')
 plt.show()
 
-descripcion = datos_final.describe()
-print(descripcion)
+control = datos_final[datos_final['Tratamiento']== 'control']
+gfp = datos_final[datos_final['Tratamiento']== '2011 GFP']
+AK21 = datos_final[datos_final['Tratamiento']== 'AK21']
+AK83 = datos_final[datos_final['Tratamiento']== 'AK83']
+B401 = datos_final[datos_final['Tratamiento']== 'B401']
+SmaAK21 = datos_final[datos_final['Tratamiento']== 'SmaAK21']
+SmaAK83 = datos_final[datos_final['Tratamiento']== 'SmaAK83']
+SmaB401 = datos_final[datos_final['Tratamiento']== 'SmaB401']
+
+#medias
+
+media_control = control.mean()
+media_gfp = gfp.mean()
+media_AK21 = AK21.mean()
+media_AK83 = AK83.mean()
+media_B401 = B401.mean()
+media_SmaAK21 = SmaAK21.mean()
+media_SmaAK83 = SmaAK83.mean()
+media_SmaB401 = SmaB401.mean()
+
+print('La media del peso seco del control es:', media_control, 
+      'La media del peso seco de las muestras inoculadas con 2011GFP es:' , media_gfp,
+      'La media del peso seco de las muestras inoculadas con AK21 es:', media_AK21,
+      'La media del peso seco de las muestras inoculadas con AK83 es', media_AK83,
+      'La media del peso seco de las muestras inoculadas con B401 es', media_B401,
+      'La media del peso seco de las muestras inoculadas con Sma(AK21) es:' ,media_AK21,
+      'La media del peso seco de las muestras inoculadas con Sma(AK83) es:', media_AK83,
+      'La media del peso seco de las muestras inoculadas con Sma(B401) es:', media_B401
+      )
 
 
-#%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION.
+
+#%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION.control = datos_final[datos_final['Tratamiento']== 'control']
 #Para eso se calcula el valor de los coeficientes que determinan la asimetria y curtosis de la distribucion.
 #ASIMETRIA
 
