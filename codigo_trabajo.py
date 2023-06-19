@@ -3,6 +3,7 @@ import scipy.stats as ss
 import statsmodels.stats.power as smp
 import numpy as np
 from statsmodels.stats.power import TTestIndPower
+from statsmodels.stats.power import tt_ind_solve_power
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -39,6 +40,8 @@ SmaB401 = datos_final[datos_final['Tratamiento']== 'Sma(B401)']
 
 #Evaluacion de parametros de centralizacion de la distribucion.
 #MEDIA
+media_peso_total = datos_final.mean(numeric_only=True)
+#31.96
 media_control = control.mean(numeric_only=True)
 #7.936364
 media_gfp = gfp.mean(numeric_only=True)
@@ -116,6 +119,7 @@ desv_total = peso_seco.std(axis=None)
 #print(desv_total)
 #23.88598342973365
 
+desv_total = datos_final.std(axis=None, numeric_only=True)
 desv_control = control.std(axis=None, numeric_only=True)
 desv_gfp = gfp.std(axis=None, numeric_only= True)
 desv_AK21 = AK21.std(axis=None, numeric_only=True)
@@ -146,15 +150,6 @@ var_SmaB401 = SmaB401.var(axis=None,  numeric_only=True)
 #print([var_control, var_gfp, var_AK21, var_AK83, var_B401, var_SmaAK21, var_SmaAK83, var_SmaB401])
 #[5.150996, 270.091576, 286.164764, 36.813895, 220.622925, 540.049281, 1684.135476, 631.017511]
 
-
-#ESTIMACION DE INTERVALOS DE CONFIANZA:
-#En este caso, podemos calcular el IC de los datos totales con distribucion normal ya que el n > 30. 
-#se calcula como:
-#IC = x+/- t * (s/√n )
-
-#ic_95_datos_total = ss.norm.interval(alpha=0.95, df = datos_final, loc= len(datos_final), scale=ss.sem(datos_final))
-#print(ic_95_datos_total)
-
 '''¿Los datos se distribuyen de manera normal? Para responder utilizo el test de normalidad.
  Planteo dos hipotesis:
  -H0: los datos se distribuyen normalmente.
@@ -163,6 +158,9 @@ var_SmaB401 = SmaB401.var(axis=None,  numeric_only=True)
 print(ss.normaltest(peso_seco, axis=0, nan_policy='propagate'))
 #NormaltestResult(statistic=94.3678816604075, pvalue=3.2231080362482276e-21)}
 #el p-valor es menor a 0.05, por lo tanto rechazo la H0 y acepto la hipotesis alternativa, es decir que los datos no se distribuyen de manera normal.
+
+
+
 
 #%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION
 #Para eso se calcula el valor de los coeficientes que determinan la asimetria y curtosis de la distribucion.
@@ -179,5 +177,115 @@ print(kurtosis)
 #Un coeficiente de curtosis menor a 0 indica que el histograma tiende a un gran apuntamiento alrededor del valor central, lo que corresponde a una distribución leptocurtica.
 
 #%% ESTIMACION DE INTERVALOS DE CONFIANZA
+#En este caso, podemos calcular el IC de los datos totales con distribucion normal ya que el n > 30. 
+#se calcula como:
+#IC = x+/- t * (s/√n )
+
+#ic_95_datos_total = ss.norm.interval(alpha=0.95, loc= len(datos_final), scale=ss.sem(datos_final))
+#print(ic_95_datos_total)
 
 
+#%%#ESTIMACION DEL TAMAÑO MUESTRAL:
+# Utilizo la media y la desviación estándar calculada previamente
+# Defino los parámetros de la prueba
+#Tamaño del efecto lo defino como la diferencia entre valores promedio que debo obtener. Seguramente entre el control negativo y positivo este la mayor diferencia.
+effect_size_peso = int(abs(media_control - media_gfp) / desv_total)
+alpha = 0.05
+power = 0.8
+
+# Calcular el tamaño muestral necesario
+n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
+#print("El tamaño muestral requerido es:" , {n_peso})
+#Tamaño muestral:16. 
+
+#%%CONTRASTE DE HIPOTESIS.
+
+lista_control= control['Peso seco'].tolist()
+lista_gfp = gfp['Peso seco'].tolist()
+lista_AK21 = AK21['Peso seco'].tolist()
+lista_AK83 = AK83['Peso seco'].tolist()
+lista_B401 = B401['Peso seco'].tolist()
+lista_SmaAK21 = SmaAK21['Peso seco'].tolist()
+lista_SmaAK83 = SmaAK83['Peso seco'].tolist()
+lista_SmaB401 = SmaB401['Peso seco'].tolist()
+
+#Planteo test de Levene para 
+#H0 = homocedasticidad de varianzas en el peso seco de las muestras es debido al azar.
+#H1 = homocedasticidad de varianzas en el peso seco de las muestras no es debido al azar.
+print(ss.levene(lista_control, lista_gfp, center='median', proportiontocut=0.05))
+#LeveneResult(statistic=32.61406676437943, pvalue=8.962316508662243e-07)
+
+#Como ya una de las comparaciones me da que las varianzas no son similares, tengo que hacer un test no parametrico para comparar los grupos.
+#PLANTEO TEST DE KRUSKAL WALLIS PARA COMPARAR LOS PESOS SECOS OBTENIDOS PARA CADA GRUPO.
+
+'''
+H0: las diferencias entre las muestras se deben al azar.
+
+H1:las diferencias entre las muestras no se deben al azar.
+'''
+
+print(ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy= 'propagate', axis=0, keepdims=False))
+#KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))  
+#Dado el valor de pvalue (4e-13), rechazo hipotesis nula y acepto hipotesis alternativas. Para los valores de peso seco en cada condicion de tratamiento, se observan diferencias significativas entre las muestras.
+
+print(ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401, lista_SmaAK21, lista_SmaAK83, lista_SmaB401,))
+'''Comparison  Statistic  p-value  Lower CI  Upper CI
+ (0 - 1)    -30.776     0.000   -49.767   -11.785
+ (0 - 2)    -27.693     0.000   -46.684    -8.702
+ (0 - 3)    -11.418     0.590   -30.409     7.573
+ (0 - 4)    -21.338     0.018   -40.525    -2.150
+ (0 - 5)    -27.275     0.002   -47.724    -6.826
+ (0 - 6)    -37.602     0.000   -57.231   -17.972
+ (0 - 7)    -37.695     0.000   -57.095   -18.296
+ (1 - 0)     30.776     0.000    11.785    49.767
+ (1 - 2)      3.083     1.000   -15.491    21.657
+ (1 - 3)     19.358     0.034     0.784    37.932
+ (1 - 4)      9.439     0.783    -9.336    28.213
+ (1 - 5)      3.501     0.999   -16.561    23.563
+ (1 - 6)     -6.826     0.958   -26.051    12.400
+ (1 - 7)     -6.919     0.952   -25.911    12.072
+ (2 - 0)     27.693     0.000     8.702    46.684
+ (2 - 1)     -3.083     1.000   -21.657    15.491
+ (2 - 3)     16.275     0.133    -2.299    34.849
+ (2 - 4)      6.355     0.968   -12.419    25.130
+ (2 - 5)      0.418     1.000   -19.644    20.480
+ (2 - 6)     -9.909     0.761   -29.135     9.317
+ (2 - 7)    -10.003     0.740   -28.994     8.989
+ (3 - 0)     11.418     0.590    -7.573    30.409
+ (3 - 1)    -19.358     0.034   -37.932    -0.784
+ (3 - 2)    -16.275     0.133   -34.849     2.299
+ (3 - 4)     -9.920     0.737   -28.694     8.855
+ (3 - 5)    -15.857     0.236   -35.919     4.205
+ (3 - 6)    -26.184     0.001   -45.410    -6.958
+ (3 - 7)    -26.278     0.001   -45.269    -7.286
+ (4 - 0)     21.338     0.018     2.150    40.525
+ (4 - 1)     -9.439     0.783   -28.213     9.336
+ (4 - 2)     -6.355     0.968   -25.130    12.419
+ (4 - 3)      9.920     0.737    -8.855    28.694
+ (4 - 5)     -5.937     0.986   -26.185    14.311
+ (4 - 6)    -16.264     0.174   -35.684     3.156
+ (4 - 7)    -16.358     0.157   -35.546     2.830
+ (5 - 0)     27.275     0.002     6.826    47.724
+ (5 - 1)     -3.501     0.999   -23.563    16.561
+ (5 - 2)     -0.418     1.000   -20.480    19.644
+ (5 - 3)     15.857     0.236    -4.205    35.919
+ (5 - 4)      5.937     0.986   -14.311    26.185
+ (5 - 6)    -10.327     0.788   -30.994    10.340
+ (5 - 7)    -10.421     0.771   -30.870    10.028
+ (6 - 0)     37.602     0.000    17.972    57.231
+ (6 - 1)      6.826     0.958   -12.400    26.051
+ (6 - 2)      9.909     0.761    -9.317    29.135
+ (6 - 3)     26.184     0.001     6.958    45.410
+ (6 - 4)     16.264     0.174    -3.156    35.684
+ (6 - 5)     10.327     0.788   -10.340    30.994
+ (6 - 7)     -0.094     1.000   -19.723    19.536
+ (7 - 0)     37.695     0.000    18.296    57.095
+ (7 - 1)      6.919     0.952   -12.072    25.911
+ (7 - 2)     10.003     0.740    -8.989    28.994
+ (7 - 3)     26.278     0.001     7.286    45.269
+ (7 - 4)     16.358     0.157    -2.830    35.546
+ (7 - 5)     10.421     0.771   -10.028    30.870
+ (7 - 6)      0.094     1.000   -19.536    19.723'''
+
+
+#Deberia hacer un test para identificar cuales son las diferencias entre cada 
