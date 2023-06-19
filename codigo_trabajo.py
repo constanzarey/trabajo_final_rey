@@ -228,7 +228,7 @@ print(ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_
 #KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))  
 #Dado el valor de pvalue (4e-13), rechazo hipotesis nula y acepto hipotesis alternativas. Para los valores de peso seco en cada condicion de tratamiento, se observan diferencias significativas entre las muestras.
 
-print(ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401, lista_SmaAK21, lista_SmaAK83, lista_SmaB401))
+result_tukey = ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401, lista_SmaAK21, lista_SmaAK83, lista_SmaB401)
 
 #Deberia hacer un test para identificar cuales son las diferencias entre cada
 '''Comparison  Statistic  p-value  Lower CI  Upper CI
@@ -289,4 +289,4 @@ print(ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401,
  (7 - 5)     10.421     0.771   -10.028    30.870
  (7 - 6)      0.094     1.000   -19.536    19.723'''
 
- 
+ #%%
