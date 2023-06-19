@@ -289,4 +289,54 @@ result_tukey = ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, li
  (7 - 5)     10.421     0.771   -10.028    30.870
  (7 - 6)      0.094     1.000   -19.536    19.723'''
 
- #%%
+#%%Realizar un análisis de dependencia de variables categóricas.
+
+#Para eso se construyo tabla de contingencia, con dos columnas: Estante y Tratamiento.
+#H0: Las variables son independientes.
+#H1: las variables no son independientes, es decir, hay relacion entre ellas.
+
+datos_final_peso = list(datos_final['Peso seco'])
+lista_2 =[]
+
+for datos in datos_final_peso:
+    if datos >= 15.0:
+        #print('si')
+        lista_2.append('Alto')
+    if datos <= 15.0:
+        #print('no')
+        lista_2.append('Bajo')
+
+#print(lista_2)
+
+datos_final['Peso seco categorico'] = lista_2
+print(datos_final)
+
+
+df2 = datos_final['Peso seco categorico'] + datos_final['Estante']
+
+a= datos_final['Peso seco categorico'] == 'Alto'
+b= datos_final['Estante'] == 'Estante1'
+
+
+groups = df2.groupby([a,b]).count() 
+print (groups)
+
+'''Peso seco categorico  Estante
+False                 False      21
+                      True       23
+True                  False      75
+                      True       59'''
+
+
+print(ss.chisquare(groups, ddof=0, axis=0))
+#Power_divergenceResult(statistic=102.53932584269663, pvalue=4.420065487234606e-22)
+#Dado que el p value es menor a 0.05, puedo rechazar H0 y aceptar que las variables no son independientes.
+
+
+#%% EVALUACION DE CORRELACION LINEAL ENTRE DOS VARIABLES.
+
+#dado que mi dataset no puede usarse para evaluar correlacion, elegi un segundo dataset para llevar a cabo este ultimo objetivo.
+
+
+
+
