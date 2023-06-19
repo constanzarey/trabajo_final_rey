@@ -21,7 +21,7 @@ plt.hist(peso_seco, bins=50)
 plt.title('Histograma de peso seco total')  # Título del histograma
 plt.xlabel('Peso seco (mg/planta)')  # Etiqueta del eje x
 plt.ylabel('Frecuencia')
-#plt.show()
+plt.show()
 
 #Descripcion de los datos totales.
 
@@ -146,12 +146,14 @@ var_SmaB401 = SmaB401.var(axis=None,  numeric_only=True)
 #print([var_control, var_gfp, var_AK21, var_AK83, var_B401, var_SmaAK21, var_SmaAK83, var_SmaB401])
 #[5.150996, 270.091576, 286.164764, 36.813895, 220.622925, 540.049281, 1684.135476, 631.017511]
 
-    # ''' Como no conozco la varianza poblacional y el n es menor a 30, uso dist t de student'''
-     #se utilizará la distribución t de student porque no conocemos la varianza poblacional y el n<30
 
-     #Se calcula como:
+#ESTIMACION DE INTERVALOS DE CONFIANZA:
+#En este caso, podemos calcular el IC de los datos totales con distribucion normal ya que el n > 30. 
+#se calcula como:
+#IC = x+/- t * (s/√n )
 
-     #Intervalo de confianza = x +/- t * (s / √n)
+#ic_95_datos_total = ss.norm.interval(alpha=0.95, df = datos_final, loc= len(datos_final), scale=ss.sem(datos_final))
+#print(ic_95_datos_total)
 
 '''¿Los datos se distribuyen de manera normal? Para responder utilizo el test de normalidad.
  Planteo dos hipotesis:
