@@ -79,11 +79,14 @@ PReguntas
 
 El tamaño muestral se puede estimar definiendo previamente una serie de parametros:
 >alpha = 0.05
+
 >power = 0.8
+
 >tamaño del efecto = int(abs(media_control - media_gfp) / desv_total)
+
 >dos colas
 
-El tamaño del efecto se define como la diferencia entre los valores promedio que espero obtener. En este caso, utilice la diferencia entre la media del peso seco del control y de la muestra inoculada con la cepa 2011 GFP, dado que entre estas dos muestras seguramente haya diferencia (la muestra gfp seria un control positivo).
+El tamaño del efecto se define como la diferencia entre los valores promedio que espero obtener dividido la desviacion tipica total. En este caso, utilice la diferencia entre la media del peso seco del control y de la muestra inoculada con la cepa 2011 GFP, dado que entre estas dos muestras seguramente haya diferencia (la muestra gfp seria un control positivo).
 
 De esta manera, el script final seria:
 >n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
