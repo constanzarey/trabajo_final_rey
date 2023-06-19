@@ -19,10 +19,8 @@ El dataset final consiste en una tabla con las siguientes columnas:
 * Peso seco (mg/planta): los pesos secos de cada planta registrados.
 
 
-***Variables a evaluar***
+***Variable a evaluar***
    * Variable continua: peso seco de las plantas expresado en mg/planta.
-   * Variable categorica: estante de la camara donde se colocaron las plantas (Estante1, Estante2).
-
 
 1) ***DISTRIBUCION Y DESCRIPCION DE LOS DATOS***
 
@@ -35,7 +33,10 @@ Los resultados obtenidos se muestran en la siguiente imagen:
      height=auto />
 
 
-Ademas, evalue la **media**de los pesos secos para cada una de las condiciones evaluadas.
+En clase, mencionamos dos tipos de parametros que caracterizan a una distribucion: los parametros de *centralizacion* y los parametros de *dispersion*. Dentro de los parametros de centralizacion, se destacan la **media**, la **mediana** y la **moda**, los cuales los calcule en base a los pesos secos para cada una de las condiciones y para el total de datos.
+A continuacion se observa un ejemplo con las medias obtenidas:
+
+>La media del peso seco total es: 31.96
 
 >La media del peso seco del control es: Peso seco    7.936364
 
@@ -53,6 +54,8 @@ Ademas, evalue la **media**de los pesos secos para cada una de las condiciones e
 
 >La media del peso seco de las muestras inoculadas con Sma(B401) es: Peso seco    29.273913
 
+Por otro lado, calcule el valor de ciertos parametros de dispersion como el **rango de valores**, **desviacion tipica** y **varianza**. Todos calculados tambien para cada condicion y total.
+
 2) ***ASIMETRIA Y CURTOSIS***
 
 Luego, analice la asimetria y curtosis de la distribucion de datos. Para eso, calcule el coeficiente de asimetria de Fisher y el coeficiente de curtosis.
@@ -61,16 +64,34 @@ Luego, analice la asimetria y curtosis de la distribucion de datos. Para eso, ca
 
 >El coeficiente de curtosis dio un valor de 7.103412786645373, lo cual indica que la distribución es **leptocurtica**.
 
+
 PReguntas
 !!!!!1
 
-para hacer describe necesito filtrar cada una de las condiciones???
-
-
-
+-porque la varianza me da 570??
 
 3) ***ESTIMACION DE INTERVALOS DE CONFIANZA***
 
+
+
+
+4) ***ESTIMACION DEL TAMAÑO MUESTRAL***
+
+El tamaño muestral se puede estimar definiendo previamente una serie de parametros:
+>alpha = 0.05
+>power = 0.8
+>tamaño del efecto = int(abs(media_control - media_gfp) / desv_total)
+>dos colas
+
+El tamaño del efecto se define como la diferencia entre los valores promedio que espero obtener. En este caso, utilice la diferencia entre la media del peso seco del control y de la muestra inoculada con la cepa 2011 GFP, dado que entre estas dos muestras seguramente haya diferencia (la muestra gfp seria un control positivo).
+
+De esta manera, el script final seria:
+>n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
+
+Como resultado, el minimo tamaño muestral que necesito para detectar diferencia entre grupos si es que existe seria 17.
+
+
+5) ***CONTRASTE DE HIPOTESIS***
 
 
 

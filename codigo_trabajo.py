@@ -151,6 +151,9 @@ var_SmaB401 = SmaB401.var(axis=None,  numeric_only=True)
 #[5.150996, 270.091576, 286.164764, 36.813895, 220.622925, 540.049281, 1684.135476, 631.017511]
 
 
+
+
+
 #%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION
 #Para eso se calcula el valor de los coeficientes que determinan la asimetria y curtosis de la distribucion.
 #ASIMETRIA
@@ -165,6 +168,11 @@ print(kurtosis)
 #7.103412786645373
 #Un coeficiente de curtosis menor a 0 indica que el histograma tiende a un gran apuntamiento alrededor del valor central, lo que corresponde a una distribución leptocurtica.
 
+
+
+
+
+
 #%% ESTIMACION DE INTERVALOS DE CONFIANZA
 #En este caso, podemos calcular el IC de los datos totales con distribucion normal ya que el n > 30. 
 #se calcula como:
@@ -174,8 +182,12 @@ print(kurtosis)
 #print(ic_95_datos_total)
 
 
+
+
+
+
 #%%#ESTIMACION DEL TAMAÑO MUESTRAL:
-# Utilizo la media y la desviación estándar calculada previamente
+# Utilizo la media y la desviación estándar calculada previamente.
 # Defino los parámetros de la prueba
 #Tamaño del efecto lo defino como la diferencia entre valores promedio que debo obtener. Seguramente entre el control negativo y positivo este la mayor diferencia.
 effect_size_peso = int(abs(media_control - media_gfp) / desv_total)
@@ -187,13 +199,16 @@ n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=pow
 #print("El tamaño muestral requerido es:" , {n_peso})
 #Tamaño muestral:16. 
 
+
+
+
+
 #%%CONTRASTE DE HIPOTESIS.
 
-#test de normalidad.
-'''¿Los datos se distribuyen de manera normal? Para responder utilizo el test de normalidad.
- Planteo dos hipotesis:
- -H0: los datos se distribuyen normalmente.
- -H1:los datos no se distribuyen normalmente.'''
+#VERIFICACION DE SUPUESTOS:
+#supuesto de normalidad. Test de normalidad.
+'''H0: los datos se distribuyen normalmente.
+   H1:los datos no se distribuyen normalmente.'''
 
 print(ss.normaltest(peso_seco, axis=0, nan_policy='propagate'))
 #NormaltestResult(statistic=94.3678816604075, pvalue=3.2231080362482276e-21)}
@@ -209,24 +224,24 @@ lista_SmaAK21 = SmaAK21['Peso seco'].tolist()
 lista_SmaAK83 = SmaAK83['Peso seco'].tolist()
 lista_SmaB401 = SmaB401['Peso seco'].tolist()
 
-#Planteo test de Levene para determinar si las varianzas entre las muestras son iguales.
+#supuesto de homocedasticidad de varianzas. Test de Levene.
 #H0 = homocedasticidad de varianzas en el peso seco de las muestras es debido al azar.
 #H1 = homocedasticidad de varianzas en el peso seco de las muestras no es debido al azar.
 print(ss.levene(lista_control, lista_gfp, center='median', proportiontocut=0.05))
 #LeveneResult(statistic=32.61406676437943, pvalue=8.962316508662243e-07)
 
+
 #Como ya una de las comparaciones me da que las varianzas no son similares, tengo que hacer un test no parametrico para comparar los grupos.
 
-#PLANTEO TEST DE KRUSKAL WALLIS PARA COMPARAR LOS PESOS SECOS OBTENIDOS PARA CADA GRUPO.
+
+#Test no parametrico para comparar mas de tres grupos. Test de Kruskal-Wallis.
 '''H0: las diferencias entre las muestras se deben al azar.
    H1:las diferencias entre las muestras no se deben al azar.'''
-
 print(ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy= 'propagate', axis=0, keepdims=False))
 #KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))  
 #Dado el valor de pvalue (4e-13), rechazo hipotesis nula y acepto hipotesis alternativas. Existen diferencias significativas entre al menos dos muestras. 
 
 result_tukey = ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401, lista_SmaAK21, lista_SmaAK83, lista_SmaB401)
-
 #Deberia hacer un test para identificar cuales son las diferencias entre cada
 '''Comparison  Statistic  p-value  Lower CI  Upper CI
  (0 - 1)    -30.776     0.000   -49.767   -11.785    #hay diferencias
