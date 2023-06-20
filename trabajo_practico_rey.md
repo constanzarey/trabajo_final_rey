@@ -60,9 +60,21 @@ Por otro lado, calcule el valor de ciertos parametros de dispersion como el **ra
 
 Luego, analice la asimetria y curtosis de la distribucion de datos. Para eso, calcule el coeficiente de asimetria de Fisher y el coeficiente de curtosis.
 
->El coeficiente de asimetria de Fisher dio un valor de 2.027382050998325. Esto indica que la distribucion de los datos presenta una **asimetria positiva**.
+- Coeficiente de asimetria:
 
->El coeficiente de curtosis dio un valor de 7.103412786645373, lo cual indica que la distribución es **leptocurtica**.
+```python
+skewness = peso_seco.skew(axis=0, skipna=True, numeric_only=False)
+```
+
+El coeficiente de asimetria de Fisher dio un valor de 2.027382050998325. Esto indica que la distribucion de los datos presenta una **asimetria positiva**.
+
+- Coeficiente de curtosis:
+
+```python
+kurtosis = peso_seco.kurt(axis=0, skipna=True, numeric_only=False)
+```
+
+El coeficiente de curtosis dio un valor de 7.103412786645373, lo cual indica que la distribución es **leptocurtica**.
 
 
 PReguntas
