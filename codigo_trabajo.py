@@ -350,5 +350,28 @@ print(ss.chisquare(groups, ddof=0, axis=0))
 #dado que mi dataset no puede usarse para evaluar correlacion, elegi un segundo dataset para llevar a cabo este ultimo objetivo.
 
 
+path = './Peso_seco.xlsx'
+datos_correlacion = pd.read_excel(path, sheet_name = 'Hoja5')
+print(datos_correlacion)
+
+#Para saber que test utilizar, compruebo si los datos se distribuyen normalmente.
+fig, (ax0, ax1) = plt.subplots(nrows=1, ncols=2)
+
+peso_seco_correlacion = datos_correlacion['Peso seco']
+peso_nodulos_correlacion = datos_correlacion['Peso nodulos promedio']
+ax0.hist(peso_seco_correlacion, bins=25, color= 'green')  
+ax0.set_title('Histograma peso seco')
+ax1.hist(peso_nodulos_correlacion, bins =25, color= 'red')
+ax1.set_title('Histograma peso nodulos promedio')
+#plt.title('Histograma de peso seco (dataset2)')  # Título del histograma
+#plt.xlabel('Peso)')  # Etiqueta del eje x
+#plt.ylabel('Frecuencia')
+fig.tight_layout()
+plt.show()
+
+
+print(ss.normaltest(peso_seco_correlacion, axis=0, nan_policy='propagate'))
+#NormaltestResult(statistic=10.161384799109037, pvalue=0.006215603844332242)
+print(ss.normaltest(peso_nodulos_correlacion, axis=0, nan_policy='propagate'))
 
 
