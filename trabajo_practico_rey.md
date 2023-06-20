@@ -144,11 +144,12 @@ Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que exis
 
 
 
-# Analisis de dependencia de variables categoricas.
+## Analisis de dependencia de variables categoricas.
 
 Para comparar dos tipos de datos, construi una tabla de contingencia. Los datos a comparar fueron los siguientes:
--Variable 1: peso seco expresado en mg/planta. Fueron convertidos a datos categoricos utilizando un punto de corte (mayor a 15 mg/planta: 'Alto', menor a 15mg/planta: 'Bajo').
--Variable 2: estante donde se ubicaron las plantas. Las opciones posibles son: 'Estante1' o 'Estante2'.
+
+- Variable 1: peso seco expresado en mg/planta. Fueron convertidos a datos categoricos utilizando un punto de corte (mayor a 15 mg/planta: 'Alto', menor a 15mg/planta: 'Bajo').
+- Variable 2: estante donde se ubicaron las plantas. Las opciones posibles son: 'Estante1' o 'Estante2'.
 
 Entonces, para comprobar si existe una relacion entre la variable 1: 'Peso seco' y la variable 2: 'Estante', plantie dos hipotesis:
 -H0: las variables son independientes.
