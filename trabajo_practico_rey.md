@@ -124,10 +124,11 @@ El resultado obtenido fue el siguiente: LeveneResult(statistic=32.61406676437943
 
 El objetivo es comparar los valores de peso seco obtenidos de las plantas control y aquellas inoculadas con 7 tipos de rizobios: 2011GFP, AK21, AK83, B401, Sma818R(pSymA AK21), Sma818R(pSymA AK83), Sma818R(pSymA B401). Las ultimas tres cepas mencionadas contienen un genoma compuesto por un cromosoma y pSymB similar y distinto pSymA. 
 
-El test no parametrico para comparar los 8 grupos fue el test de Kruskal-Wallis, ya que permite comparar mas de 3 grupos.
+El test no parametrico utilizado para comparar los 8 grupos fue el test de Kruskal-Wallis, ya que permite comparar mas de 3 grupos.
 Las hipotesis planteadas fueron las siguientes:
 -H0: las diferencias entre las muestras se deben al azar.
 -H1:las diferencias entre las muestras no se deben al azar.
+
 El script utilizado fue:
 
 >ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy= 'propagate', axis=0, keepdims=False)
@@ -136,6 +137,48 @@ El resultado obtenido fue:
 >KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))
 
 Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras.
+
+
+
+###¿Como comparar grupos entre si para saber cual es el que tiene diferencias (entre pares?)
+
+
+
+# Analisis de dependencia de variables categoricas.
+
+Para comparar dos tipos de datos, construi una tabla de contingencia. Los datos a comparar fueron los siguientes:
+-Variable 1: peso seco expresado en mg/planta. Fueron convertidos a datos categoricos utilizando un punto de corte (mayor a 15 mg/planta: 'Alto', menor a 15mg/planta: 'Bajo').
+-Variable 2: estante donde se ubicaron las plantas. Las opciones posibles son: 'Estante1' o 'Estante2'.
+
+Entonces, para comprobar si existe una relacion entre la variable 1: 'Peso seco' y la variable 2: 'Estante', plantie dos hipotesis:
+-H0: las variables son independientes.
+-H1: las variables no son independientes, es decir, existe relacion entre las mismas.
+
+Inicialmente como explique previamente, construi un script para convertir los datos numericos de peso seco a datos categoricos y dichos resultados los agregue a una columna extra en el dataframe llamada 'Peso seco categorico'.
+
+Una vez convertidos los datos, arme la tabla de contingencia y agrupe los datos con la operacion 'groupby'.
+El script utilizado fue el siguiente:
+
+'''
+df2 = datos_final['Peso seco categorico'] + datos_final['Estante']
+a= datos_final['Peso seco categorico'] == 'Alto'
+b= datos_final['Estante'] == 'Estante1'
+groups = df2.groupby([a,b]).count() 
+'''
+
+
+El resultado obtenido fue el siguiente:
+'''Peso seco categorico  Estante
+False                 False      21
+                      True       23
+True                  False      75
+                      True       59'''
+
+Finalmente, utilice el test estadistico de chi-cuadrado para realizar la comparacion de las variables partiendo de la tabla de contingencia.
+
+>ss.chisquare(groups, ddof=0, axis=0)
+
+El resultado obtenido fue: Power_divergenceResult(statistic=102.53932584269663, pvalue=4.420065487234606e-22). El p-value menor a 0.05, indica que rechazo H0 y acepto H1, es decir que **existe relacion entre la variable Estante y la variable Peso seco**.
 
 
 

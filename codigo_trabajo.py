@@ -302,10 +302,11 @@ result_tukey = ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, li
 
 #%%Realizar un análisis de dependencia de variables categóricas.
 
-#Para eso se construyo tabla de contingencia, con dos columnas: Estante y Tratamiento.
+#Para eso se construyo tabla de contingencia, con dos columnas: Estante y Peso seco.
 #H0: Las variables son independientes.
 #H1: las variables no son independientes, es decir, hay relacion entre ellas.
 
+#CONVERSION DE LOS DATOS NUMERICOS DE PESO SECO A DATOS CATEGORICOS, CON PUNTO DE CORTE DE 15MG/PLANTA.
 datos_final_peso = list(datos_final['Peso seco'])
 lista_2 =[]
 
@@ -323,11 +324,11 @@ datos_final['Peso seco categorico'] = lista_2
 print(datos_final)
 
 
-df2 = datos_final['Peso seco categorico'] + datos_final['Estante']
+#construccion de tabla de contingencia.
 
+df2 = datos_final['Peso seco categorico'] + datos_final['Estante']
 a= datos_final['Peso seco categorico'] == 'Alto'
 b= datos_final['Estante'] == 'Estante1'
-
 
 groups = df2.groupby([a,b]).count() 
 print (groups)
