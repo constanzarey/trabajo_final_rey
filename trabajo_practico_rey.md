@@ -33,6 +33,8 @@ Los resultados obtenidos se muestran en la siguiente imagen:
      height=auto />
 
 
+En el histograma, se observa que los datos no se distribuirian normalmente. Aun asi, realizo mas adelante un contraste de hipotesis para evaluarlo estadisticamente.
+
 En clase, mencionamos dos tipos de parametros que caracterizan a una distribucion: los parametros de *centralizacion* y los parametros de *dispersion*. Dentro de los parametros de centralizacion, se destacan la **media**, la **mediana** y la **moda**, los cuales los calcule en base a los pesos secos para cada una de las condiciones y para el total de datos.
 A continuacion se observa un ejemplo con las medias obtenidas:
 
@@ -197,7 +199,7 @@ True                  False      75
                       True       59
 ```
 
-Finalmente, utilice el test estadistico de chi-cuadrado para realizar la comparacion de las variables partiendo de la tabla de contingencia.
+Finalmente, utilice el test estadistico de chi-cuadrado para determinar asociacion entre las dos variables categoricas partiendo de la tabla de contingencia.
 
 ```python
 ss.chisquare(groups, ddof=0, axis=0)
@@ -205,6 +207,19 @@ ss.chisquare(groups, ddof=0, axis=0)
 
 El resultado obtenido fue: Power_divergenceResult(statistic=102.53932584269663, pvalue=4.420065487234606e-22). El p-value menor a 0.05, indica que rechazo H0 y acepto H1, es decir que **existe relacion entre la variable Estante y la variable Peso seco**.
 
+
+## Analisis de correlacion entre dos variables.
+
+Para realizar este punto del trabajo, utilice un dataset distinto al anterior. En este caso, la tabla cuenta con dos variables a analizar:
+
+- Peso seco de plantas expresado en mg/planta. Estos resultados fueron obtenidos para plantas inoculadas solo con la cepa 2011GFP.
+- Promedio de peso fresco de nodulos por planta.
+
+Inicialmente, realice un histograma para cada tipo de datos para observar como se distribuyen.
+
+<img src="./histograma_variables1y2_correlacion.png" 
+     width="50%" 
+     height=auto />
 
 
 

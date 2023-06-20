@@ -370,8 +370,17 @@ fig.tight_layout()
 plt.show()
 
 
+#Planteo hipotesis para ver si se cumple normalidad para los dos tipos de datos:
+'''
+-H0: los datos se distribuyen normalmente.
+-H1: los datos no se distribuyen normalmente.'''
+
 print(ss.normaltest(peso_seco_correlacion, axis=0, nan_policy='propagate'))
 #NormaltestResult(statistic=10.161384799109037, pvalue=0.006215603844332242)
 print(ss.normaltest(peso_nodulos_correlacion, axis=0, nan_policy='propagate'))
+#NormaltestResult(statistic=32.788994682394886, pvalue=7.585081842245872e-08)
 
+#segun ambos resultados ambos datos no se distribuyen normalmente.
+
+#Es por eso que utilizo un test no parametrico para evaluar correlacion.
 
