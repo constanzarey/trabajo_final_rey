@@ -101,8 +101,8 @@ Primero, realice test de hipotesis para verificar si se cumplen los supuestos de
 a) Para verificar si los datos se distribuyen normalmente, realice un test de normalidad (Normal test), dado que brinda una buena
 estimacion cuando se cuenta con menos de 5000 datos.
 Se plantearon dos hipotesis:
--H0: los datos se distribuyen normalmente.
--H1: los datos no se distribuyen normalmente.
+- H0: los datos se distribuyen normalmente.
+- H1: los datos no se distribuyen normalmente.
 El script utilizado para realizar el test fue el siguiente:
 
 >ss.normaltest(peso_seco, axis=0, nan_policy='propagate')
@@ -110,8 +110,8 @@ El script utilizado para realizar el test fue el siguiente:
 El resultado obtenido fue el siguiente: NormaltestResult(statistic=94.3678816604075, pvalue=3.2231080362482276e-21). El valor de p-value menor a 0.05, permite rechazar la H0 y aceptar la H1, es decir que ***los datos no se distribuyen normalmente**.
 
 b) Para verificar similitud de varianzas, realice un test de Levene. Se plantearon dos hipotesis:
--H0: la homocedasticidad de varianzas en el peso seco de las muestras se debe al azar.
--H1: la homocedasticidad de varianzas en el peso seco de las muestras no se debe al azar.
+- H0: la homocedasticidad de varianzas en el peso seco de las muestras se debe al azar.
+- H1: la homocedasticidad de varianzas en el peso seco de las muestras no se debe al azar.
 Para realizar este test, compare los valores de peso seco obtenidos para el control y los obtenidos al inocular las plantas con la cepa 2011 GFP. 
 
 El script utilizado fue:
@@ -152,28 +152,30 @@ Para comparar dos tipos de datos, construi una tabla de contingencia. Los datos 
 - Variable 2: estante donde se ubicaron las plantas. Las opciones posibles son: 'Estante1' o 'Estante2'.
 
 Entonces, para comprobar si existe una relacion entre la variable 1: 'Peso seco' y la variable 2: 'Estante', plantie dos hipotesis:
--H0: las variables son independientes.
--H1: las variables no son independientes, es decir, existe relacion entre las mismas.
+- H0: las variables son independientes.
+- H1: las variables no son independientes, es decir, existe relacion entre las mismas.
 
 Inicialmente como explique previamente, construi un script para convertir los datos numericos de peso seco a datos categoricos y dichos resultados los agregue a una columna extra en el dataframe llamada 'Peso seco categorico'.
 
 Una vez convertidos los datos, arme la tabla de contingencia y agrupe los datos con la operacion 'groupby'.
 El script utilizado fue el siguiente:
 
-'''
-df2 = datos_final['Peso seco categorico'] + datos_final['Estante']
-a= datos_final['Peso seco categorico'] == 'Alto'
-b= datos_final['Estante'] == 'Estante1'
-groups = df2.groupby([a,b]).count() 
-'''
+```python
+   df2 = datos_final['Peso seco categorico'] + datos_final['Estante']
+   a= datos_final['Peso seco categorico'] == 'Alto'
+   b= datos_final['Estante'] == 'Estante1'
+   groups = df2.groupby([a,b]).count() 
+```
 
 
 El resultado obtenido fue el siguiente:
-'''Peso seco categorico  Estante
+```python
+Peso seco categorico  Estante
 False                 False      21
                       True       23
 True                  False      75
-                      True       59'''
+                      True       59
+```
 
 Finalmente, utilice el test estadistico de chi-cuadrado para realizar la comparacion de las variables partiendo de la tabla de contingencia.
 
