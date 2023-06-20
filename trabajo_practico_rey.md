@@ -22,7 +22,7 @@ El dataset final consiste en una tabla con las siguientes columnas:
 ***Variable a evaluar***
    * Variable continua: peso seco de las plantas expresado en mg/planta.
 
-1) ***DISTRIBUCION Y DESCRIPCION DE LOS DATOS***
+# 1) ***DISTRIBUCION Y DESCRIPCION DE LOS DATOS***
 
 Primero, evalue como se distribuyen los datos del peso seco. Para eso, filtre los datos de la columna peso seco y los grafique utilizando la biblioteca mathplotlib.
 
@@ -56,7 +56,7 @@ A continuacion se observa un ejemplo con las medias obtenidas:
 
 Por otro lado, calcule el valor de ciertos parametros de dispersion como el **rango de valores**, **desviacion tipica** y **varianza**. Todos calculados tambien para cada condicion y total.
 
-2) ***ASIMETRIA Y CURTOSIS***
+# 2) ***ASIMETRIA Y CURTOSIS***
 
 Luego, analice la asimetria y curtosis de la distribucion de datos. Para eso, calcule el coeficiente de asimetria de Fisher y el coeficiente de curtosis.
 
@@ -70,12 +70,12 @@ PReguntas
 
 -porque la varianza me da 570??
 
-3) ***ESTIMACION DE INTERVALOS DE CONFIANZA***
+# 3) ***ESTIMACION DE INTERVALOS DE CONFIANZA***
 
 
 
 
-4) ***ESTIMACION DEL TAMAÑO MUESTRAL***
+# 4) ***ESTIMACION DEL TAMAÑO MUESTRAL***
 
 El tamaño muestral se puede estimar definiendo previamente una serie de parametros:
 >alpha = 0.05
@@ -94,7 +94,7 @@ De esta manera, el script final seria:
 Como resultado, el minimo tamaño muestral que necesito para detectar diferencia entre grupos si es que existe seria 17.
 
 
-5) ***CONTRASTE DE HIPOTESIS***
+# 5) ***CONTRASTE DE HIPOTESIS***
 
 Primero, realice test de hipotesis para verificar si se cumplen los supuestos de *normalidad* y *homocedasticidad de varianzas*.
 
@@ -120,7 +120,7 @@ El script utilizado fue:
 El resultado obtenido fue el siguiente: LeveneResult(statistic=32.61406676437943, pvalue=8.962316508662243e-07). El valor de p-value menor a 0.05, permite rechazar H0 y aceptar H1, es decir que **las varianzas no son similares entre las muestras**. Dado que una de las comparaciones no cumple con la homocedasticidad de varianzas, no se cumple este supuesto.
 
 
-# Dado que los supuestos no se cumplen, debo realizar un test no parametrico para comparar los grupos.
+### Dado que los supuestos no se cumplen, debo realizar un test no parametrico para comparar los grupos.
 
 El objetivo es comparar los valores de peso seco obtenidos de las plantas control y aquellas inoculadas con 7 tipos de rizobios: 2011GFP, AK21, AK83, B401, Sma818R(pSymA AK21), Sma818R(pSymA AK83), Sma818R(pSymA B401). Las ultimas tres cepas mencionadas contienen un genoma compuesto por un cromosoma y pSymB similar y distinto pSymA. 
 
