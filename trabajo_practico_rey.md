@@ -217,7 +217,7 @@ Para realizar este punto del trabajo, utilice un dataset distinto al anterior. E
 
 Inicialmente, realice un histograma para cada tipo de datos para observar como se distribuyen.
 
-<img src="./histograma_variables1y2_correlacion.png" 
+<img src="./Histograma_variables1y2_correlacion.png" 
      width="50%" 
      height=auto />
 
