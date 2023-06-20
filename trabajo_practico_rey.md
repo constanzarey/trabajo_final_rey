@@ -96,6 +96,47 @@ Como resultado, el minimo tamaño muestral que necesito para detectar diferencia
 
 5) ***CONTRASTE DE HIPOTESIS***
 
+Primero, realice test de hipotesis para verificar si se cumplen los supuestos de *normalidad* y *homocedasticidad de varianzas*.
+
+a) Para verificar si los datos se distribuyen normalmente, realice un test de normalidad (Normal test), dado que brinda una buena
+estimacion cuando se cuenta con menos de 5000 datos.
+Se plantearon dos hipotesis:
+-H0: los datos se distribuyen normalmente.
+-H1: los datos no se distribuyen normalmente.
+El script utilizado para realizar el test fue el siguiente:
+
+>ss.normaltest(peso_seco, axis=0, nan_policy='propagate')
+
+El resultado obtenido fue el siguiente: NormaltestResult(statistic=94.3678816604075, pvalue=3.2231080362482276e-21). El valor de p-value menor a 0.05, permite rechazar la H0 y aceptar la H1, es decir que ***los datos no se distribuyen normalmente**.
+
+b) Para verificar similitud de varianzas, realice un test de Levene. Se plantearon dos hipotesis:
+-H0: la homocedasticidad de varianzas en el peso seco de las muestras se debe al azar.
+-H1: la homocedasticidad de varianzas en el peso seco de las muestras no se debe al azar.
+Para realizar este test, compare los valores de peso seco obtenidos para el control y los obtenidos al inocular las plantas con la cepa 2011 GFP. 
+
+El script utilizado fue:
+>ss.levene(lista_control, lista_gfp, center='median', proportiontocut=0.05
+
+El resultado obtenido fue el siguiente: LeveneResult(statistic=32.61406676437943, pvalue=8.962316508662243e-07). El valor de p-value menor a 0.05, permite rechazar H0 y aceptar H1, es decir que **las varianzas no son similares entre las muestras**. Dado que una de las comparaciones no cumple con la homocedasticidad de varianzas, no se cumple este supuesto.
+
+
+# Dado que los supuestos no se cumplen, debo realizar un test no parametrico para comparar los grupos.
+
+El objetivo es comparar los valores de peso seco obtenidos de las plantas control y aquellas inoculadas con 7 tipos de rizobios: 2011GFP, AK21, AK83, B401, Sma818R(pSymA AK21), Sma818R(pSymA AK83), Sma818R(pSymA B401). Las ultimas tres cepas mencionadas contienen un genoma compuesto por un cromosoma y pSymB similar y distinto pSymA. 
+
+El test no parametrico para comparar los 8 grupos fue el test de Kruskal-Wallis, ya que permite comparar mas de 3 grupos.
+Las hipotesis planteadas fueron las siguientes:
+-H0: las diferencias entre las muestras se deben al azar.
+-H1:las diferencias entre las muestras no se deben al azar.
+El script utilizado fue:
+
+>ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy= 'propagate', axis=0, keepdims=False)
+
+El resultado obtenido fue:
+>KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))
+
+Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras.
+
 
 
 

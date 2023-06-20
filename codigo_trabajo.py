@@ -172,7 +172,6 @@ print(kurtosis)
 
 
 
-
 #%% ESTIMACION DE INTERVALOS DE CONFIANZA
 #En este caso, podemos calcular el IC de los datos totales con distribucion normal ya que el n > 30. 
 #se calcula como:
