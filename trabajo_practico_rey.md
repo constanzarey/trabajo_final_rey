@@ -89,7 +89,9 @@ El tamaño muestral se puede estimar definiendo previamente una serie de paramet
 El tamaño del efecto se define como la diferencia entre los valores promedio que espero obtener dividido la desviacion tipica total. En este caso, utilice la diferencia entre la media del peso seco del control y de la muestra inoculada con la cepa 2011 GFP, dado que entre estas dos muestras seguramente haya diferencia (la muestra gfp seria un control positivo).
 
 De esta manera, el script final seria:
->n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
+```python
+n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
+```
 
 Como resultado, el minimo tamaño muestral que necesito para detectar diferencia entre grupos si es que existe seria 17.
 
@@ -105,7 +107,9 @@ Se plantearon dos hipotesis:
 - H1: los datos no se distribuyen normalmente.
 El script utilizado para realizar el test fue el siguiente:
 
->ss.normaltest(peso_seco, axis=0, nan_policy='propagate')
+```python
+ss.normaltest(peso_seco, axis=0, nan_policy='propagate')
+```
 
 El resultado obtenido fue el siguiente: NormaltestResult(statistic=94.3678816604075, pvalue=3.2231080362482276e-21). El valor de p-value menor a 0.05, permite rechazar la H0 y aceptar la H1, es decir que ***los datos no se distribuyen normalmente**.
 
@@ -115,7 +119,9 @@ b) Para verificar similitud de varianzas, realice un test de Levene. Se plantear
 Para realizar este test, compare los valores de peso seco obtenidos para el control y los obtenidos al inocular las plantas con la cepa 2011 GFP. 
 
 El script utilizado fue:
->ss.levene(lista_control, lista_gfp, center='median', proportiontocut=0.05
+```python
+ss.levene(lista_control, lista_gfp, center='median', proportiontocut=0.05
+```
 
 El resultado obtenido fue el siguiente: LeveneResult(statistic=32.61406676437943, pvalue=8.962316508662243e-07). El valor de p-value menor a 0.05, permite rechazar H0 y aceptar H1, es decir que **las varianzas no son similares entre las muestras**. Dado que una de las comparaciones no cumple con la homocedasticidad de varianzas, no se cumple este supuesto.
 
@@ -131,7 +137,9 @@ Las hipotesis planteadas fueron las siguientes:
 
 El script utilizado fue:
 
->ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy= 'propagate', axis=0, keepdims=False)
+```python
+ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy= 'propagate', axis=0, keepdims=False)
+```
 
 El resultado obtenido fue:
 >KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))
@@ -179,7 +187,9 @@ True                  False      75
 
 Finalmente, utilice el test estadistico de chi-cuadrado para realizar la comparacion de las variables partiendo de la tabla de contingencia.
 
->ss.chisquare(groups, ddof=0, axis=0)
+```python
+ss.chisquare(groups, ddof=0, axis=0)
+```
 
 El resultado obtenido fue: Power_divergenceResult(statistic=102.53932584269663, pvalue=4.420065487234606e-22). El p-value menor a 0.05, indica que rechazo H0 y acepto H1, es decir que **existe relacion entre la variable Estante y la variable Peso seco**.
 
