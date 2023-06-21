@@ -106,6 +106,7 @@ Los resultados se muestran a continuacion:
 #script de ejemplo utilizado para calcular el IC utilizando distribucion t de student:
 ic_95_datos_control = ss.t.interval(confidence= 0.95, df= len(control['Peso seco'].index) -1, loc = media_control, scale = ss.sem(control['Peso seco']))
 
+'''
 El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 6.930088013333918 8.942639259393355 ]
 El intervalo de confianza para los datos de peso seco del tratamiento gfp es:[ 31.772834875167433 45.652165124832564 ]
 El intervalo de confianza para los datos de peso seco del tratamiento AK21 es:[ 28.48599522929093 42.77233810404241 ]
@@ -114,6 +115,7 @@ El intervalo de confianza para los datos de peso seco del tratamiento B401 es:[ 
 El intervalo de confianza para los datos de peso seco del tratamiento SmaAK21 es:[ 23.654647977328914 46.767574244893304 ]
 El intervalo de confianza para los datos de peso seco del tratamiento SmaAK83 es:[ 26.857721593545204 64.21846888264527 ]
 El intervalo de confianza para los datos de peso seco del tratamiento SmaB401 es:[ 34.49420667305269 56.76942969058368 ]
+'''
 ```
 
 
