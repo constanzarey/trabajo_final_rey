@@ -382,5 +382,10 @@ print(ss.normaltest(peso_nodulos_correlacion, axis=0, nan_policy='propagate'))
 
 #segun ambos resultados ambos datos no se distribuyen normalmente.
 
-#Es por eso que utilizo un test no parametrico para evaluar correlacion.
+#Es por eso que utilizo un test no parametrico para evaluar correlacion entre dos variables continuas (Test de correlacion de Spearman)
 
+print(ss.spearmanr(peso_seco_correlacion, peso_nodulos_correlacion))
+#SignificanceResult(statistic=0.15548804084084852, pvalue=0.4681458596212671)
+
+
+#el valor del coeficiente de Spearman dio cercano a 0, por lo tanto, no habria correlacion lineal entre las dos variables. El pvalue indica la significancia del valor.

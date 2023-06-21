@@ -222,6 +222,27 @@ Inicialmente, realice un histograma para cada tipo de datos para observar como s
      height=auto />
 
 
+En la figura, se observa que los datos de peso seco podrian distribuirse normalmente, pero no seria asi para los datos promedio de los pesos fresco de los nodulos. Aun asi, realice un contraste de hipotesis para verificar la distribucion normal de los datos.
+
+```python
+#Planteo hipotesis para ver si se cumple normalidad para los dos tipos de datos:
+'''
+-H0: los datos se distribuyen normalmente.
+-H1: los datos no se distribuyen normalmente.'''
+
+print(ss.normaltest(peso_seco_correlacion, axis=0, nan_policy='propagate'))
+#NormaltestResult(statistic=10.161384799109037, pvalue=0.006215603844332242)
+print(ss.normaltest(peso_nodulos_correlacion, axis=0, nan_policy='propagate'))
+#NormaltestResult(statistic=32.788994682394886, pvalue=7.585081842245872e-08)
+```
+
+Segun los resultados obtenidos, ninguno de los dos tipos de datos se distribuye normalmente. Por lo tanto, utilice un test no parametrico para evaluar si las dos variables continuas se correlacionan linealmente. El test utilizado fue **test de correlacion de Spearman**.
+
+```python
+ss.spearmanr(peso_seco_correlacion, peso_nodulos_correlacion)
+#SignificanceResult(statistic=0.15548804084084852, pvalue=0.4681458596212671)
+```
+
 
 
 
