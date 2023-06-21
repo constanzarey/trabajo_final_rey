@@ -6,6 +6,7 @@ from statsmodels.stats.power import TTestIndPower
 from statsmodels.stats.power import tt_ind_solve_power
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 #%% FILTRADO DE DATOS DEL DATASET
@@ -394,6 +395,14 @@ ax1.set_title('Histograma peso nodulos promedio')
 fig.tight_layout()
 plt.show()
 
+plt.scatter(peso_seco_correlacion, peso_nodulos_correlacion)
+plt.xlabel('Peso seco')
+plt.ylabel('Peso nodulos')
+plt.title('Correlacion entre peso seco y peso nodulos')
+plt.grid(True)
+plt.show()
+
+#En el grafico, parece que no tendrian una correlacion lineal ambas variables. Aun asi, planteo las hipotesis.
 
 #Planteo hipotesis para ver si se cumple normalidad para los dos tipos de datos:
 '''

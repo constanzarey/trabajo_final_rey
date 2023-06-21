@@ -60,7 +60,7 @@ Por otro lado, calcule el valor de ciertos parametros de dispersion como el **ra
 
 ## 2) ***ASIMETRIA Y CURTOSIS***
 
-Luego, analice la asimetria y curtosis de la distribucion de datos. Para eso, calcule el coeficiente de asimetria de Fisher y el coeficiente de curtosis.
+Luego, analice la asimetria y curtosis de la distribucion de los datos de peso seco. Para eso, calcule el coeficiente de asimetria de Fisher y el coeficiente de curtosis.
 
 - Coeficiente de asimetria:
 
@@ -174,7 +174,7 @@ El resultado obtenido fue el siguiente: LeveneResult(statistic=32.61406676437943
 
 El objetivo es comparar los valores de peso seco obtenidos de las plantas control y aquellas inoculadas con 7 tipos de rizobios: 2011GFP, AK21, AK83, B401, Sma818R(pSymA AK21), Sma818R(pSymA AK83), Sma818R(pSymA B401). Las ultimas tres cepas mencionadas contienen un genoma compuesto por un cromosoma y pSymB similar y distinto pSymA. 
 
-El test no parametrico utilizado para comparar los 8 grupos fue el test de Kruskal-Wallis, ya que permite comparar mas de 3 grupos.
+El test no parametrico utilizado para comparar los 8 grupos fue el test de Kruskal-Wallis, ya que permite comparar la mediana de mas de 3 grupos, cuando no se distribuyen de manera normal.
 Las hipotesis planteadas fueron las siguientes:
 -H0: las diferencias entre las muestras se deben al azar.
 -H1:las diferencias entre las muestras no se deben al azar.
