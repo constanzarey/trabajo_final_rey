@@ -215,6 +215,8 @@ Para realizar este punto del trabajo, utilice un dataset distinto al anterior. E
 - Peso seco de plantas expresado en mg/planta. Estos resultados fueron obtenidos para plantas inoculadas solo con la cepa 2011GFP.
 - Promedio de peso fresco de nodulos por planta.
 
+A priori, uno podria pensar que estas dos variables podrian estar correlacionadas, dado que tendria sentido que a mayor peso fresco de nodulos, mayor sea el peso seco de las plantas.
+
 Inicialmente, realice un histograma para cada tipo de datos para observar como se distribuyen.
 
 <img src="./Histograma_variables1y2_correlacion.png" 
@@ -243,6 +245,7 @@ ss.spearmanr(peso_seco_correlacion, peso_nodulos_correlacion)
 #SignificanceResult(statistic=0.15548804084084852, pvalue=0.4681458596212671)
 ```
 
+Segun estos resultados, ***ambos tipos de datos no estarian correlacionados***, dado que el estadistico de spearman dio un valor cercano a cero.
 
 
 
