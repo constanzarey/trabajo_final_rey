@@ -86,7 +86,35 @@ PReguntas
 
 ## 3) ***ESTIMACION DE INTERVALOS DE CONFIANZA***
 
+Para estimar los intervalos de confianza de los datos de peso seco para todas las muestras, asumi distribucion normal dado que el n>30. En este caso, calcule los intervalos de confianza definiendo ciertos parametros:
+- confidence = 95% = 0.95
+- loc = media 
+- scale= desviacion estandar
 
+```python
+ic_95_datos_total = ss.norm.interval(confidence= 0.95, loc= media_peso_total, scale = ss.sem(peso_seco))
+#(array([28.46068031]), array([35.47864554]))
+```
+
+El IC para los datos totales es [28.46, 35.47]. Esto quiere decir que: **hay un 95% de probabilidad de que el intervalo de confianza de [28.46, 35.47] contenga la media poblacional del peso seco de las plantas**.
+
+A la hora de calcular los IC para cada uno de los tratamientos, asumi distribucion t de student dado que el n es menor a 30 y la varianza poblacional es desconocida. Aparte de los parametros definidos previamente, fue necesario agregar un parametro más:
+- df = grados de libertad asociados a la distribucion t de student. Dicho valor lo calcule restando 1 a la cantidad de datos para cada tratamiento.
+Los resultados se muestran a continuacion:
+
+```python
+#script de ejemplo utilizado para calcular el IC utilizando distribucion t de student:
+ic_95_datos_control = ss.t.interval(confidence= 0.95, df= len(control['Peso seco'].index) -1, loc = media_control, scale = ss.sem(control['Peso seco']))
+
+El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 6.930088013333918 8.942639259393355 ]
+El intervalo de confianza para los datos de peso seco del tratamiento gfp es:[ 31.772834875167433 45.652165124832564 ]
+El intervalo de confianza para los datos de peso seco del tratamiento AK21 es:[ 28.48599522929093 42.77233810404241 ]
+El intervalo de confianza para los datos de peso seco del tratamiento AK83 es:[ 16.792109129617586 21.91622420371575 ]
+El intervalo de confianza para los datos de peso seco del tratamiento B401 es:[ 22.850829472297793 35.69699661465873 ]
+El intervalo de confianza para los datos de peso seco del tratamiento SmaAK21 es:[ 23.654647977328914 46.767574244893304 ]
+El intervalo de confianza para los datos de peso seco del tratamiento SmaAK83 es:[ 26.857721593545204 64.21846888264527 ]
+El intervalo de confianza para los datos de peso seco del tratamiento SmaB401 es:[ 34.49420667305269 56.76942969058368 ]
+```
 
 
 ## 4) ***ESTIMACION DEL TAMAÑO MUESTRAL***
@@ -107,7 +135,7 @@ De esta manera, el script final seria:
 n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
 ```
 
-Como resultado, el minimo tamaño muestral que necesito para detectar diferencia entre grupos si es que existe seria 17.
+Como resultado, el minimo tamaño muestral que necesito para detectar diferencia entre grupos si es que existe seria 17 aproximadamente. En este caso, para cada condicion evaluada, cumplo con el tamaño muestral minimo requerido (en la mayoria de los casos tengo mas de 20 datos para cada tipo de muestra).
 
 
 ## 5) ***CONTRASTE DE HIPOTESIS***

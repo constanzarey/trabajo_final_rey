@@ -176,14 +176,41 @@ print(kurtosis)
 #En este caso, podemos calcular el IC de los datos totales con distribucion normal ya que el n > 30. 
 #se calcula como:
 #IC = x+/- t * (s/√n )
-
-#ic_95_datos_total = ss.norm.interval(alpha=0.95, loc= len(datos_final), scale=ss.sem(datos_final))
-#print(ic_95_datos_total)
-
+#loc es el promedio de los datos
+#scale es el desvio estandar.
 
 
+ic_95_datos_total = ss.norm.interval(confidence= 0.95, loc= media_peso_total, scale = ss.sem(peso_seco))
+#(array([28.46068031]), array([35.47864554]))
 
+#Para el resto de los datos correspondiente a cada tratamiento, asumi distribucion t de student dado que el n es menor a 30 y la varianza poblacional es desconocida.
+ic_95_datos_control = ss.t.interval(confidence= 0.95, df= len(control['Peso seco'].index) -1, loc = media_control, scale = ss.sem(control['Peso seco']))
+ic_95_datos_gfp = ss.t.interval(confidence= 0.95, df= len(gfp['Peso seco'].index) -1, loc= media_gfp, scale = ss.sem(gfp['Peso seco']))
+ic_95_datos_AK21 = ss.t.interval(confidence= 0.95, df= len(AK21['Peso seco'].index) -1, loc= media_AK21, scale = ss.sem(AK21['Peso seco']))
+ic_95_datos_AK83 = ss.t.interval(confidence= 0.95, df= len(AK83['Peso seco'].index) -1, loc= media_AK83, scale = ss.sem(AK83['Peso seco']))
+ic_95_datos_B401 = ss.t.interval(confidence= 0.95, df= len(B401['Peso seco'].index) -1, loc= media_B401, scale = ss.sem(B401['Peso seco']))
+ic_95_datos_SmaAK21 = ss.t.interval(confidence= 0.95, df= len(SmaAK21['Peso seco'].index) -1, loc= media_SmaAK21, scale = ss.sem(SmaAK21['Peso seco']))
+ic_95_datos_SmaAK83 = ss.t.interval(confidence= 0.95, df= len(SmaAK83['Peso seco'].index) -1, loc= media_SmaAK83, scale = ss.sem(SmaAK83['Peso seco']))
+ic_95_datos_SmaB401 = ss.t.interval(confidence= 0.95, df= len(SmaB401['Peso seco'].index) -1, loc= media_SmaB401, scale = ss.sem(SmaB401['Peso seco']))
 
+print('El intervalo de confianza para los datos de peso seco del tratamiento control es:[', np.min(ic_95_datos_control), np.max(ic_95_datos_control),']')
+print('El intervalo de confianza para los datos de peso seco del tratamiento gfp es:[', np.min(ic_95_datos_gfp), np.max(ic_95_datos_gfp),']')
+print('El intervalo de confianza para los datos de peso seco del tratamiento AK21 es:[', np.min(ic_95_datos_AK21), np.max(ic_95_datos_AK21),']')
+print('El intervalo de confianza para los datos de peso seco del tratamiento AK83 es:[', np.min(ic_95_datos_AK83), np.max(ic_95_datos_AK83),']')
+print('El intervalo de confianza para los datos de peso seco del tratamiento B401 es:[', np.min(ic_95_datos_B401), np.max(ic_95_datos_B401),']')
+print('El intervalo de confianza para los datos de peso seco del tratamiento SmaAK21 es:[', np.min(ic_95_datos_SmaAK21), np.max(ic_95_datos_SmaAK21),']')
+print('El intervalo de confianza para los datos de peso seco del tratamiento SmaAK83 es:[', np.min(ic_95_datos_SmaAK83), np.max(ic_95_datos_SmaAK83),']')
+print('El intervalo de confianza para los datos de peso seco del tratamiento SmaB401 es:[', np.min(ic_95_datos_SmaB401), np.max(ic_95_datos_SmaB401),']')
+
+'''
+El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 6.930088013333918 8.942639259393355 ]
+El intervalo de confianza para los datos de peso seco del tratamiento gfp es:[ 31.772834875167433 45.652165124832564 ]
+El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 28.48599522929093 42.77233810404241 ]
+El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 16.792109129617586 21.91622420371575 ]
+El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 23.654647977328914 46.767574244893304 ]
+El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 26.857721593545204 64.21846888264527 ]
+El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 34.49420667305269 56.76942969058368 ]
+'''
 
 #%%#ESTIMACION DEL TAMAÑO MUESTRAL:
 # Utilizo la media y la desviación estándar calculada previamente.
@@ -197,8 +224,6 @@ power = 0.8
 n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
 #print("El tamaño muestral requerido es:" , {n_peso})
 #Tamaño muestral:16. 
-
-
 
 
 
