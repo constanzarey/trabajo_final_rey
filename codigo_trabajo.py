@@ -60,19 +60,21 @@ media_SmaAK83 = SmaAK83.mean(numeric_only=True)
 media_SmaB401 = SmaB401.mean(numeric_only=True)
 #45.631818
 
-print('La media del peso seco total es:', media_peso_total,
-      'La media del peso seco para el tratamiento control el:', media_control,
-      'La media del peso seco para el tratamiento gfp:', media_gfp,
-      'La media del peso seco para el tratamiento AK21 es:', media_AK21,
-      'La media del peso seco para el tratamiento AK83:', media_AK83,
-      'La media del peso seco para el tratamiento B401 es:', media_B401,
-      'La media del peso seco para el tratamiento SmaAK21 es:', media_SmaAK21,
-      'La media del peso seco para el tratamiento SmaAK83 es:', media_SmaAK83,
-      'La media del peso seco para el tratamiento SmaB401 es:', media_SmaB401)
+'''print('La media del peso seco total es:', media_peso_total,
+       'La media del peso seco para el tratamiento control el:', media_control,
+       'La media del peso seco para el tratamiento gfp:', media_gfp,
+       'La media del peso seco para el tratamiento AK21 es:', media_AK21,
+       'La media del peso seco para el tratamiento AK83:', media_AK83,
+       'La media del peso seco para el tratamiento B401 es:', media_B401,
+       'La media del peso seco para el tratamiento SmaAK21 es:', media_SmaAK21,
+       'La media del peso seco para el tratamiento SmaAK83 es:', media_SmaAK83,
+       'La media del peso seco para el tratamiento SmaB401 es:', media_SmaB401)
+'''
 
 
 
 #Evaluacion de la mediana de los datos para cada condicion.
+mediana_peso_total= peso_seco.median(numeric_only=True)
 
 mediana_control = control.median(numeric_only=True)
 #8.4
@@ -125,6 +127,18 @@ ri_SmaAK83 = SmaAK83.quantile(0.75, numeric_only = True) - SmaAK83.quantile(0.25
 #51.5
 ri_SmaB401 = SmaB401.quantile(0.75, numeric_only = True) - SmaB401.quantile(0.25, numeric_only = True)
 #26.725
+
+
+
+resultados_finales = {'Tratamiento': ['total', 'control', 'gfp', 'AK21', 'AK83', 'B401', 'SmaAK21', 'SmaAK83', 'SmaB401'],
+                      'Media': [float(media_peso_total.values), float(media_control.values), float(media_gfp.values), float(media_AK21.values), float(media_AK83.values), float(media_B401.values), float(media_SmaAK21.values), float(media_SmaAK83.values), float(media_SmaB401.values)],
+                      'Mediana': [mediana_peso_total , float(mediana_control.values), float(mediana_gfp.values), float(mediana_AK21.values), float(mediana_AK83.values), float(mediana_B401.values), float(mediana_SmaAK21.values), float(mediana_SmaAK83.values), float(mediana_SmaB401.values)]
+                     }
+
+tabla = pd.DataFrame(resultados_finales)
+print(tabla)
+
+
 
 
 #DESVIACION TIPICA

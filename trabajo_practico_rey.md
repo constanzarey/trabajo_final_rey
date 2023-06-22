@@ -40,15 +40,16 @@ A continuacion se observa un ejemplo con las medias obtenidas:
 
 ```python
 '''
-La media del peso seco total es: Peso seco    31.969663
-La media del peso seco para el tratamiento control el: Peso seco    7.936364
-La media del peso seco para el tratamiento gfp: Peso seco    38.7125
-La media del peso seco para el tratamiento AK21 es: Peso seco    35.629167
-La media del peso seco para el tratamiento AK83: Peso seco    19.354167
-La media del peso seco para el tratamiento B401 es: Peso seco    29.273913
-La media del peso seco para el tratamiento SmaAK21 es: Peso seco    35.211111
-La media del peso seco para el tratamiento SmaAK83 es: Peso seco    45.538095
-La media del peso seco para el tratamiento SmaB401 es: Peso seco    45.631818
+Tratamiento      Media  Mediana
+0       total  31.969663    25.65
+1     control   7.936364     8.40
+2         gfp  38.712500    38.40
+3        AK21  35.629167    33.80
+4        AK83  19.354167    19.40
+5        B401  29.273913    25.10
+6     SmaAK21  35.211111    27.10
+7     SmaAK83  45.538095    26.20
+8     SmaB401  45.631818    39.65
 '''
 ```
 
