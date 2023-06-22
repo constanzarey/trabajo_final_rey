@@ -266,6 +266,61 @@ print(ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_
 #KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))  
 #Dado el valor de pvalue (4e-13), rechazo hipotesis nula y acepto hipotesis alternativas. Existen diferencias significativas entre al menos dos muestras. 
 
+
+control_gfp = ss.mannwhitneyu(lista_control, lista_gfp , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_AK21 = ss.mannwhitneyu(lista_control, lista_AK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_AK83 = ss.mannwhitneyu(lista_control, lista_AK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_B401 = ss.mannwhitneyu(lista_control, lista_B401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_SmaAK21 = ss.mannwhitneyu(lista_control, lista_SmaAK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_SmaAK83 =ss.mannwhitneyu(lista_control, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_SmaB401 =ss.mannwhitneyu(lista_control, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+#El valor p resultante al comparar el peso seco control vs. peso seco del tratamiento gfp es:  3.608812976421934e-08
+
+comparaciones_significativas = []
+
+def select_variables(variables, lista):
+    selected_variables = []
+
+    for i, var in enumerate(variables):
+        
+        #var_name = var[0]  # Nombre de la variable
+        var_value = var.pvalue # pvalue de la tupla
+        
+        if var_value <= 0.05:
+            selected_variables.append((lista[i], var_value))
+    
+    #resultados = pd.DataFrame({'Variables': selected_variables})
+    #return resultados
+    
+    #for i, val in enumerate(variables):
+        #if val.pvalue <= 0.05:
+            #selected_variables.append((variables[i], val, lista[i]))
+    
+    df = pd.DataFrame(selected_variables, columns=['comparacion', 'pvalue'])
+    df.set_index(df.index + 1, inplace=True)  # Ajustar el índice según la posición
+    return df
+
+
+a = select_variables([control_gfp, control_AK21, control_AK83, control_B401, control_SmaAK21, control_SmaAK83, control_SmaB401], ['control_gfp', 'control_AK21', 'control_AK83', 'control_B401', 'control_SmaAK21', 'control_SmaAK83', 'control_SmaB401'])
+print(a)
+
+
+'''
+comparacion        pvalue
+1      control_gfp  3.608813e-08
+2     control_AK21  6.836416e-09
+3     control_AK83  2.179180e-08
+4     control_B401  1.282650e-08
+5  control_SmaAK21  7.859956e-08
+6  control_SmaAK83  1.411337e-06
+7  control_SmaB401  1.324495e-06
+'''
+
+print("El valor p resultante al comparar el peso seco control vs. peso seco del tratamiento gfp es: ",control_gfp.pvalue)
+
+
+
+
 result_tukey = ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401, lista_SmaAK21, lista_SmaAK83, lista_SmaB401)
 #Deberia hacer un test para identificar cuales son las diferencias entre cada
 '''Comparison  Statistic  p-value  Lower CI  Upper CI
