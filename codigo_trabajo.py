@@ -27,8 +27,6 @@ plt.show()
 
 #Descripcion de los datos totales.
 
-descripcion_estadistica = peso_seco.describe()
-
 control = datos_final[datos_final['Tratamiento']== 'control']
 gfp = datos_final[datos_final['Tratamiento']== '2011 GFP']
 AK21 = datos_final[datos_final['Tratamiento']== 'AK21']
@@ -42,61 +40,29 @@ SmaB401 = datos_final[datos_final['Tratamiento']== 'Sma(B401)']
 #Evaluacion de parametros de centralizacion de la distribucion.
 #MEDIA
 media_peso_total = datos_final.mean(numeric_only=True)
-#31.96
 media_control = control.mean(numeric_only=True)
-#7.936364
 media_gfp = gfp.mean(numeric_only=True)
-#38.7125
 media_AK21 = AK21.mean(numeric_only=True)
-#35.629167
 media_AK83 = AK83.mean(numeric_only=True)
-#19.354167
 media_B401 = B401.mean(numeric_only=True)
-#29.273913
 media_SmaAK21 = SmaAK21.mean(numeric_only=True)
-#35.211111
 media_SmaAK83 = SmaAK83.mean(numeric_only=True)
-#45.538095
 media_SmaB401 = SmaB401.mean(numeric_only=True)
-#45.631818
-
-'''print('La media del peso seco total es:', media_peso_total,
-       'La media del peso seco para el tratamiento control el:', media_control,
-       'La media del peso seco para el tratamiento gfp:', media_gfp,
-       'La media del peso seco para el tratamiento AK21 es:', media_AK21,
-       'La media del peso seco para el tratamiento AK83:', media_AK83,
-       'La media del peso seco para el tratamiento B401 es:', media_B401,
-       'La media del peso seco para el tratamiento SmaAK21 es:', media_SmaAK21,
-       'La media del peso seco para el tratamiento SmaAK83 es:', media_SmaAK83,
-       'La media del peso seco para el tratamiento SmaB401 es:', media_SmaB401)
-'''
-
-
 
 #Evaluacion de la mediana de los datos para cada condicion.
 mediana_peso_total= peso_seco.median(numeric_only=True)
-
 mediana_control = control.median(numeric_only=True)
-#8.4
 mediana_gfp = gfp.median(numeric_only=True)
-#38.4
 mediana_AK21 = AK21.median(numeric_only=True)
-#33.8
 mediana_AK83 = AK83.median(numeric_only=True)
-#19.4
 mediana_B401 = B401.median(numeric_only=True)
-#25.1
 mediana_SmaAK21 = SmaAK21.median(numeric_only=True)
-#27.1
 mediana_SmaAK83 = SmaAK83.median(numeric_only=True)
-#26.2
 mediana_SmaB401 = SmaB401.median(numeric_only=True)
-#39.65
-#print('La mediana del peso seco para el tratamiento control es:')
 
 
 #Evaluacion de la moda de los datos para cada condicion.
-#chequear si me anda
+moda_total = peso_seco.mode()
 moda_control = control.mode(numeric_only=True)
 moda_gfp = gfp.mode(numeric_only=True)
 moda_AK21 = AK21.mode(numeric_only=True)
@@ -106,46 +72,21 @@ moda_SmaAK21 = SmaAK21.mode(numeric_only=True)
 moda_SmaAK83 = SmaAK83.mode(numeric_only=True)
 moda_SmaB401 = SmaB401.mode(numeric_only=True)
 
+
 #Parametros de dispersion.
 
 ri_total = peso_seco.quantile(0.75) - peso_seco.quantile(0.25)
-#24.799999999999997 (especifica el rango de valores)
-
 ri_control = control.quantile(0.75, numeric_only = True) - control.quantile(0.25, numeric_only = True)
-#3.5
 ri_gfp = gfp.quantile(0.75, numeric_only = True) - gfp.quantile(0.25, numeric_only = True)
-#25.6
 ri_AK21 = AK21.quantile(0.75, numeric_only = True) - AK21.quantile(0.25, numeric_only = True)
-#19.025
 ri_AK83 = AK83.quantile(0.75, numeric_only = True) - AK83.quantile(0.25, numeric_only = True)
-#7.525
 ri_B401 = B401.quantile(0.75, numeric_only = True) - B401.quantile(0.25, numeric_only = True)
-#16.35
 ri_SmaAK21 = SmaAK21.quantile(0.75, numeric_only = True) - SmaAK21.quantile(0.25, numeric_only = True)
-#24.65
 ri_SmaAK83 = SmaAK83.quantile(0.75, numeric_only = True) - SmaAK83.quantile(0.25, numeric_only = True)
-#51.5
 ri_SmaB401 = SmaB401.quantile(0.75, numeric_only = True) - SmaB401.quantile(0.25, numeric_only = True)
-#26.725
-
-
-
-resultados_finales = {'Tratamiento': ['total', 'control', 'gfp', 'AK21', 'AK83', 'B401', 'SmaAK21', 'SmaAK83', 'SmaB401'],
-                      'Media': [float(media_peso_total.values), float(media_control.values), float(media_gfp.values), float(media_AK21.values), float(media_AK83.values), float(media_B401.values), float(media_SmaAK21.values), float(media_SmaAK83.values), float(media_SmaB401.values)],
-                      'Mediana': [mediana_peso_total , float(mediana_control.values), float(mediana_gfp.values), float(mediana_AK21.values), float(mediana_AK83.values), float(mediana_B401.values), float(mediana_SmaAK21.values), float(mediana_SmaAK83.values), float(mediana_SmaB401.values)]
-                     }
-
-tabla = pd.DataFrame(resultados_finales)
-print(tabla)
-
-
-
 
 #DESVIACION TIPICA
 desv_total = peso_seco.std(axis=None)
-#print(desv_total)
-#23.88598342973365
-
 desv_total = datos_final.std(axis=None, numeric_only=True)
 desv_control = control.std(axis=None, numeric_only=True)
 desv_gfp = gfp.std(axis=None, numeric_only= True)
@@ -156,15 +97,9 @@ desv_SmaAK21 = SmaAK21.std(axis=None,  numeric_only=True)
 desv_SmaAK83 = SmaAK83.std(axis=None,  numeric_only=True)
 desv_SmaB401 = SmaB401.std(axis=None,  numeric_only=True)
 
-#print([desv_control, desv_gfp, desv_AK21, desv_AK83, desv_B401, desv_SmaAK21, desv_SmaAK83, desv_SmaB401])
-#[2.26958, 16.434463, 16.916405, 6.067446, 14.853381, 23.23896, 41.03822, 25.120062]
 
 #VARIANZA.
-
 var_total = peso_seco.var(axis=None)
-#print(var_total)
-#570
-
 var_control = control.var(axis=None, numeric_only=True)
 var_gfp = gfp.var(axis=None, numeric_only= True)
 var_AK21 = AK21.var(axis=None, numeric_only=True)
@@ -174,8 +109,18 @@ var_SmaAK21 = SmaAK21.var(axis=None,  numeric_only=True)
 var_SmaAK83 = SmaAK83.var(axis=None,  numeric_only=True)
 var_SmaB401 = SmaB401.var(axis=None,  numeric_only=True)
 
-#print([var_control, var_gfp, var_AK21, var_AK83, var_B401, var_SmaAK21, var_SmaAK83, var_SmaB401])
-#[5.150996, 270.091576, 286.164764, 36.813895, 220.622925, 540.049281, 1684.135476, 631.017511]
+resultados_finales = {'Tratamiento': ['total', 'control', 'gfp', 'AK21', 'AK83', 'B401', 'SmaAK21', 'SmaAK83', 'SmaB401'],
+                      'Media': [float(media_peso_total.values), float(media_control.values), float(media_gfp.values), float(media_AK21.values), float(media_AK83.values), float(media_B401.values), float(media_SmaAK21.values), float(media_SmaAK83.values), float(media_SmaB401.values)],
+                      'Mediana': [mediana_peso_total , float(mediana_control.values), float(mediana_gfp.values), float(mediana_AK21.values), float(mediana_AK83.values), float(mediana_B401.values), float(mediana_SmaAK21.values), float(mediana_SmaAK83.values), float(mediana_SmaB401.values)],
+                      'Moda': [[moda_total.values],[moda_control.values], [moda_gfp.values], [moda_AK21.values], [moda_AK83.values], [moda_B401.values], [moda_SmaAK21.values], [moda_SmaAK83.values], [moda_SmaB401.values]],
+                      'RI' : [ri_total, float(ri_control.values), float(ri_gfp.values), float(ri_AK21.values), float(ri_AK83.values), float(ri_B401.values), float(ri_SmaAK21.values), float(ri_SmaAK83.values), float(ri_SmaB401.values)],
+                      'Desviacion tipica' : [float(desv_total.values), float(desv_control.values), float(desv_gfp.values), float(desv_AK21.values), float(desv_AK83.values), float(desv_B401.values), float(desv_SmaAK21.values), float(desv_SmaAK83.values), float(desv_SmaB401.values)],
+                      'Varianza': [float(var_total), float(var_control.values), float(var_gfp.values), float(var_AK21.values), float(var_AK83.values), float(var_B401.values), float(var_SmaAK21.values), float(var_SmaAK83.values), float(var_SmaB401.values)]
+                      }
+
+tabla = pd.DataFrame(resultados_finales)
+print(tabla)
+
 
 
 #%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION
@@ -191,9 +136,6 @@ kurtosis = peso_seco.kurt(axis=0, skipna=True, numeric_only=False)
 print(kurtosis)
 #7.103412786645373
 #Un coeficiente de curtosis menor a 0 indica que el histograma tiende a un gran apuntamiento alrededor del valor central, lo que corresponde a una distribución leptocurtica.
-
-
-
 
 
 #%% ESTIMACION DE INTERVALOS DE CONFIANZA

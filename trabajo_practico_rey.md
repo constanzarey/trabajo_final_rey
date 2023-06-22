@@ -36,30 +36,27 @@ Los resultados obtenidos se muestran en la siguiente imagen:
 En el histograma, se observa que los datos no se distribuirian normalmente. Aun asi, realizo mas adelante un contraste de hipotesis para evaluarlo estadisticamente.
 
 En clase, mencionamos dos tipos de parametros que caracterizan a una distribucion: los parametros de *centralizacion* y los parametros de *dispersion*. Dentro de los parametros de centralizacion, se destacan la **media**, la **mediana** y la **moda**, los cuales los calcule en base a los pesos secos para cada una de las condiciones y para el total de datos.
-A continuacion se observa un ejemplo con las medias obtenidas:
+Por otro lado, calcule el valor de ciertos parametros de dispersion como el **rango de valores**, **desviacion tipica** y **varianza**. Todos calculados tambien para cada condicion y total. 
+
+Los resultados se resumieron en un unico dataframe para poder observarlos todos juntos.
 
 ```python
 '''
-Tratamiento      Media  Mediana
-0       total  31.969663    25.65
-1     control   7.936364     8.40
-2         gfp  38.712500    38.40
-3        AK21  35.629167    33.80
-4        AK83  19.354167    19.40
-5        B401  29.273913    25.10
-6     SmaAK21  35.211111    27.10
-7     SmaAK83  45.538095    26.20
-8     SmaB401  45.631818    39.65
+  Tratamiento      Media  Mediana                                               Moda      RI  Desviacion tipica     Varianza
+0       total  31.969663    25.65                               [[16.7, 20.4, 48.7]]  24.800          23.885983   570.540204
+1     control   7.936364     8.40                           [[[4.9], [8.4], [10.1]]]   3.500           2.269581     5.150996
+2         gfp  38.712500    38.40  [[[7.7], [16.9], [20.4], [21.3], [23.1], [23.3...  25.600          16.434463   270.091576
+3        AK21  35.629167    33.80  [[[13.4], [16.7], [17.8], [19.3], [20.4], [22....  19.025          16.916405   286.164764
+4        AK83  19.354167    19.40                                         [[[19.4]]]   7.525           6.067446    36.813895
+5        B401  29.273913    25.10  [[[10.8], [12.3], [13.0], [14.7], [18.6], [18....  16.350          14.853381   220.622925
+6     SmaAK21  35.211111    27.10                                         [[[16.7]]]  24.650          23.238960   540.049281
+7     SmaAK83  45.538095    26.20  [[[6.3], [6.5], [12.9], [14.0], [17.2], [18.2]...  51.500          41.038220  1684.135476
+8     SmaB401  45.631818    39.65  [[[4.8], [7.3], [13.7], [24.1], [32.6], [33.0]...  26.725          25.120062   631.017511
 '''
 ```
 
-Por otro lado, calcule el valor de ciertos parametros de dispersion como el **rango de valores**, **desviacion tipica** y **varianza**. Todos calculados tambien para cada condicion y total. Los resultados obtenidos son los siguientes:
+Segun los resultados obtenidos en base a los parametros de dispersion (varianza) pareceria que el tratamiento SmaAK83 tuvo la mayor dispersion de los datos.
 
-'''python
-
-
-
-'''
 
 ## 2) ***ASIMETRIA Y CURTOSIS***
 
@@ -81,11 +78,6 @@ kurtosis = peso_seco.kurt(axis=0, skipna=True, numeric_only=False)
 
 El coeficiente de curtosis dio un valor de 7.103412786645373, lo cual indica que la distribución es **leptocurtica**.
 
-
-PReguntas
-!!!!!1
-
--porque la varianza me da 570??
 
 ## 3) ***ESTIMACION DE INTERVALOS DE CONFIANZA***
 
@@ -191,11 +183,44 @@ ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy
 El resultado obtenido fue:
 >KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))
 
-Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras.
+> Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras.
+
+Para saber cuales son las comparaciones que presentan diferencias significativas, utilice un test no parametrico de Mann-Whitney. Con ese fin, compare de a pares en todas las combinaciones posibles los pesos secos correspondientes a los distintos tratamientos, para determinar cuales son los que presentan diferencias significativas.
+Planteo asi, dos hipotesis utilizadas para las comparaciones:
+- H0: no hay diferencias significativas entre las muestras.
+- H1: hay diferencias significativas entre las muestras.
+
+A continuacion se muestra un ejemplo del script utilizado:
+
+```python
+control_gfp = ss.mannwhitneyu(lista_control, lista_gfp , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+```
+
+Para comparar los resultados obtenidos, genere una funcion que me filtre aquellas comparaciones cuyo pvalue sea menor a 0.05 (ya que rechazo H0 y acepto H1 de que las muestras presentan diferencias significativas) y las agregue a una lista. Con dicha lista, construi un dataframe para visualizar los datos.
 
 
+```python
+'''
+comparacion        pvalue
+1       control_gfp  3.608813e-08
+2      control_AK21  6.836416e-09
+3      control_AK83  2.179180e-08
+4      control_B401  1.282650e-08
+5   control_SmaAK21  7.859956e-08
+6   control_SmaAK83  1.411337e-06
+7   control_SmaB401  1.324495e-06
+8          gfp_AK83  1.121968e-05
+9          gfp_B401  3.605200e-02
+10        AK21_AK83  6.600991e-05
+11        AK83_B401  8.054759e-03
+12     AK83_SmaAK21  9.171183e-03
+13     AK83_SmaAK83  1.796990e-02
+14     AK83_SmaB401  3.735680e-05
+15     B401_SmaB401  1.249955e-02
+'''
+```
 
-###¿Como comparar grupos entre si para saber cual es el que tiene diferencias (entre pares?)
+En la tabla, se observan cuales son las comparaciones que presentan diferencias significativas entre si.
 
 
 
