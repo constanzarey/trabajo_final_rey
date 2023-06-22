@@ -183,7 +183,7 @@ ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy
 El resultado obtenido fue:
 >KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))
 
-> Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras.
+### Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras.
 
 Para saber cuales son las comparaciones que presentan diferencias significativas, utilice un test no parametrico de Mann-Whitney. Con ese fin, compare de a pares en todas las combinaciones posibles los pesos secos correspondientes a los distintos tratamientos, para determinar cuales son los que presentan diferencias significativas.
 Planteo asi, dos hipotesis utilizadas para las comparaciones:
