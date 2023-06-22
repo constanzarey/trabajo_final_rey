@@ -321,6 +321,7 @@ print("El valor p resultante al comparar el peso seco control vs. peso seco del 
 
 
 
+
 result_tukey = ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401, lista_SmaAK21, lista_SmaAK83, lista_SmaB401)
 #Deberia hacer un test para identificar cuales son las diferencias entre cada
 '''Comparison  Statistic  p-value  Lower CI  Upper CI
