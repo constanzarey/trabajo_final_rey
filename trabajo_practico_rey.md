@@ -132,7 +132,7 @@ De esta manera, el script final seria:
 n_peso = tt_ind_solve_power(effect_size=effect_size_peso, alpha=alpha, power=power, ratio=1.0, alternative='two-sided')
 ```
 
-Como resultado, el minimo tamaño muestral que necesito para detectar diferencia entre grupos si es que existe seria 17 aproximadamente. En este caso, para cada condicion evaluada, cumplo con el tamaño muestral minimo requerido (en la mayoria de los casos tengo mas de 20 datos para cada tipo de muestra).
+Como resultado, el minimo tamaño muestral que necesito para detectar diferencia entre grupos si es que existe seria 17 aproximadamente. En este caso, para cada condicion evaluada, cumplo con el tamaño muestral minimo requerido (en todos los casos tengo mas de 20 datos para cada tipo de muestra).
 
 
 ## 5) ***CONTRASTE DE HIPOTESIS***
