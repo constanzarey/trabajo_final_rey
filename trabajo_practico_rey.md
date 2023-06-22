@@ -165,7 +165,7 @@ ss.levene(lista_control, lista_gfp, center='median', proportiontocut=0.05
 El resultado obtenido fue el siguiente: LeveneResult(statistic=32.61406676437943, pvalue=8.962316508662243e-07). El valor de p-value menor a 0.05, permite rechazar H0 y aceptar H1, es decir que **las varianzas no son similares entre las muestras**. Dado que una de las comparaciones no cumple con la homocedasticidad de varianzas, no se cumple este supuesto.
 
 
-**Dado que los supuestos no se cumplen, debo realizar un test no parametrico para comparar los grupos.**
+### **Dado que los supuestos no se cumplen, debo realizar un test no parametrico para comparar los grupos.**
 
 El objetivo es comparar los valores de peso seco obtenidos de las plantas control y aquellas inoculadas con 7 cepas de *S. meliloti*: 2011GFP, AK21, AK83, B401, Sma818R(pSymA AK21), Sma818R(pSymA AK83), Sma818R(pSymA B401). Las ultimas tres cepas mencionadas contienen un genoma compuesto por un cromosoma y pSymB similar y distinto pSymA. 
 
@@ -183,7 +183,7 @@ ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_policy
 El resultado obtenido fue:
 >KruskalResult(statistic=array([7.58756481e-02, 1.77000000e+02, 7.25729970e+01]), pvalue=array([9.99999112e-01, 8.37571234e-35, 4.45519986e-13]))
 
-**Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras**
+### **Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras**
 
 Para saber cuales son las comparaciones que presentan diferencias significativas, utilice un test no parametrico de Mann-Whitney. Con ese fin, compare de a pares en todas las combinaciones posibles los pesos secos correspondientes a los distintos tratamientos, para determinar cuales son los que presentan diferencias significativas.
 Planteo asi, dos hipotesis utilizadas para las comparaciones:
