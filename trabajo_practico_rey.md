@@ -4,12 +4,12 @@
 ***Estudiante: Constanza Rey***
 
 ### Marco teórico 
-En el marco del presente curso, presento el trabajo practico final donde utilice las herramientas vistas para analizar los datos obtenidos en el marco de mi tesis doctoral. El mismo se centra en el estudio de una especie de rizobio (***Sinorhizobium meliloti***) y su par simbionte (alfalfa, ***Medicago sativa***). Se sabe que todas las cepas de ***S. meliloti*** presentan siempre al menos tres replicones grandes: un cromosoma y dos megaplasmidos tipo pSyms (pSymA y pSymB) y que el pSymA es uno de los mas variables entre cepas. Para poder determinar que genes son los que aportan la diversidad genetica a las cepas de este rizobio, nos propusimos estudiar los pSymAs de varias cepas de ***S. meliloti***. 
+En el marco del presente curso, presento el trabajo practico final donde utilice las herramientas vistas para analizar los datos obtenidos en el marco de mi tesis doctoral. El mismo se centra en el estudio de una especie de rizobio (***Sinorhizobium meliloti***) y su par simbionte (alfalfa, ***Medicago sativa***). Se sabe que todas las cepas de ***S. meliloti*** presentan siempre al menos tres replicones grandes: un cromosoma y dos megaplasmidos tipo pSyms (pSymA y pSymB) y que el pSymA es uno de los mas variables entre cepas. Para poder determinar que genes son los que aportan la diversidad genetica a las cepas de este rizobio, nos propusimos estudiar los pSymAs de varias cepas de ***S. meliloti***.  Con ese fin, contruimos cepas hibridas de ***S. meliloti*** que contienen el mismo contexto genomico y cada uno de los pSymA, correspondientes a cada cepa. Las cepas hibridas generadas se nombran como: Sma(pSymA de cepa correspondiente), siendo por ejemplo la cepa hibrida con el pSymA AK21: Sma(AK21).
 
 
-### Diseño del experimento
-Para evaluar el efecto de los distintos pSymA en el fenotipo, contruimos cepas hibridas de S. meliloti que contienen el mismo contexto genomico y cada uno de los pSymA. Uno de los aspectos a evaluar fue la eficiencia simbiotica de las cepas obtenidas. 
-Con ese fin, diseñe un ensayo en alfalfa inoculando con las cepas a evaluar y utilizando 12 plantas por condicion. Luego de un mes y medio, se obtiene la parte aerea de las plantas y cada una se coloca en sobres para dejarlas en estufa a 65°C durante una semana. Finalmente, se registraron los pesos obtenidos en una balanza analitica.
+### Diseño y metodologia del experimento
+Uno de los aspectos a evaluar para los hibridos obtenidos fue la eficiencia simbiotica. 
+Con ese fin, diseñe un ensayo en alfalfa inoculando con las cepas a evaluar y utilizando 12 plantas por condicion. Cada set de plantas fue sometida a la inoculacion con una determinada cepa (excepto el control). Las cepas utilizadas fueron 2011GFP, que funciona como un control positivo, tres cepas diferentes (AK21, AK83 y B401) y los tres respectivos hibridos de cada cepa (SmaAK21, SmaAK83, SmaB401). Luego de un mes y medio, se obtiene la parte aerea de las plantas y cada una se coloca en sobres para dejarlas en estufa a 65°C durante una semana. Finalmente, se registraron los pesos obtenidos en una balanza analitica.
 Ademas, dado que en la camara de plantas observamos diferencias al crecer las plantas en un estante u otro, se registraron los estantes en el que colocamos cada una de las plantas. Nos aseguramos de que por estante haya al menos 12 plantas por condicion.
 
 
@@ -24,7 +24,7 @@ El dataset final consiste en una tabla con las siguientes columnas:
 
 ## 1) ***DISTRIBUCION Y DESCRIPCION DE LOS DATOS***
 
-Primero, evalue como se distribuyen los datos del peso seco. Para eso, filtre los datos de la columna peso seco y los grafique utilizando la biblioteca mathplotlib.
+Primero, evalue como se distribuyen los datos totales del peso seco. Para eso, filtre los datos de la columna peso seco y los grafique utilizando la biblioteca mathplotlib.
 
 Los resultados obtenidos se muestran en la siguiente imagen:
 
@@ -38,25 +38,27 @@ En el histograma, se observa que los datos no se distribuirian normalmente. Aun 
 En clase, mencionamos dos tipos de parametros que caracterizan a una distribucion: los parametros de *centralizacion* y los parametros de *dispersion*. Dentro de los parametros de centralizacion, se destacan la **media**, la **mediana** y la **moda**, los cuales los calcule en base a los pesos secos para cada una de las condiciones y para el total de datos.
 A continuacion se observa un ejemplo con las medias obtenidas:
 
->La media del peso seco total es: 31.96
+```python
+'''
+La media del peso seco total es: Peso seco    31.969663
+La media del peso seco para el tratamiento control el: Peso seco    7.936364
+La media del peso seco para el tratamiento gfp: Peso seco    38.7125
+La media del peso seco para el tratamiento AK21 es: Peso seco    35.629167
+La media del peso seco para el tratamiento AK83: Peso seco    19.354167
+La media del peso seco para el tratamiento B401 es: Peso seco    29.273913
+La media del peso seco para el tratamiento SmaAK21 es: Peso seco    35.211111
+La media del peso seco para el tratamiento SmaAK83 es: Peso seco    45.538095
+La media del peso seco para el tratamiento SmaB401 es: Peso seco    45.631818
+'''
+```
 
->La media del peso seco del control es: Peso seco    7.936364
+Por otro lado, calcule el valor de ciertos parametros de dispersion como el **rango de valores**, **desviacion tipica** y **varianza**. Todos calculados tambien para cada condicion y total. Los resultados obtenidos son los siguientes:
 
->La media del peso seco de las muestras inoculadas con 2011GFP es: Peso seco    38.7125
+'''python
 
->La media del peso seco de las muestras inoculadas con AK21 es: Peso seco    35.629167
 
->La media del peso seco de las muestras inoculadas con AK83 es Peso seco    19.354167
 
->La media del peso seco de las muestras inoculadas con B401 es Peso seco    29.273913
-
->La media del peso seco de las muestras inoculadas con Sma(AK21) es: Peso seco    35.629167
-
->La media del peso seco de las muestras inoculadas con Sma(AK83) es: Peso seco    19.354167
-
->La media del peso seco de las muestras inoculadas con Sma(B401) es: Peso seco    29.273913
-
-Por otro lado, calcule el valor de ciertos parametros de dispersion como el **rango de valores**, **desviacion tipica** y **varianza**. Todos calculados tambien para cada condicion y total.
+'''
 
 ## 2) ***ASIMETRIA Y CURTOSIS***
 

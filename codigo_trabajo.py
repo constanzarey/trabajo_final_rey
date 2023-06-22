@@ -60,6 +60,17 @@ media_SmaAK83 = SmaAK83.mean(numeric_only=True)
 media_SmaB401 = SmaB401.mean(numeric_only=True)
 #45.631818
 
+print('La media del peso seco total es:', media_peso_total,
+      'La media del peso seco para el tratamiento control el:', media_control,
+      'La media del peso seco para el tratamiento gfp:', media_gfp,
+      'La media del peso seco para el tratamiento AK21 es:', media_AK21,
+      'La media del peso seco para el tratamiento AK83:', media_AK83,
+      'La media del peso seco para el tratamiento B401 es:', media_B401,
+      'La media del peso seco para el tratamiento SmaAK21 es:', media_SmaAK21,
+      'La media del peso seco para el tratamiento SmaAK83 es:', media_SmaAK83,
+      'La media del peso seco para el tratamiento SmaB401 es:', media_SmaB401)
+
+
 
 #Evaluacion de la mediana de los datos para cada condicion.
 
@@ -79,6 +90,7 @@ mediana_SmaAK83 = SmaAK83.median(numeric_only=True)
 #26.2
 mediana_SmaB401 = SmaB401.median(numeric_only=True)
 #39.65
+#print('La mediana del peso seco para el tratamiento control es:')
 
 
 #Evaluacion de la moda de los datos para cada condicion.
@@ -137,7 +149,7 @@ desv_SmaB401 = SmaB401.std(axis=None,  numeric_only=True)
 
 var_total = peso_seco.var(axis=None)
 #print(var_total)
-#570?????
+#570
 
 var_control = control.var(axis=None, numeric_only=True)
 var_gfp = gfp.var(axis=None, numeric_only= True)
@@ -150,9 +162,6 @@ var_SmaB401 = SmaB401.var(axis=None,  numeric_only=True)
 
 #print([var_control, var_gfp, var_AK21, var_AK83, var_B401, var_SmaAK21, var_SmaAK83, var_SmaB401])
 #[5.150996, 270.091576, 286.164764, 36.813895, 220.622925, 540.049281, 1684.135476, 631.017511]
-
-
-
 
 
 #%% EVALUAR ASIMETRIA Y CURTOSIS DE LA DISTRIBUCION
@@ -194,14 +203,14 @@ ic_95_datos_SmaAK21 = ss.t.interval(confidence= 0.95, df= len(SmaAK21['Peso seco
 ic_95_datos_SmaAK83 = ss.t.interval(confidence= 0.95, df= len(SmaAK83['Peso seco'].index) -1, loc= media_SmaAK83, scale = ss.sem(SmaAK83['Peso seco']))
 ic_95_datos_SmaB401 = ss.t.interval(confidence= 0.95, df= len(SmaB401['Peso seco'].index) -1, loc= media_SmaB401, scale = ss.sem(SmaB401['Peso seco']))
 
-print('El intervalo de confianza para los datos de peso seco del tratamiento control es:[', np.min(ic_95_datos_control), np.max(ic_95_datos_control),']')
-print('El intervalo de confianza para los datos de peso seco del tratamiento gfp es:[', np.min(ic_95_datos_gfp), np.max(ic_95_datos_gfp),']')
-print('El intervalo de confianza para los datos de peso seco del tratamiento AK21 es:[', np.min(ic_95_datos_AK21), np.max(ic_95_datos_AK21),']')
-print('El intervalo de confianza para los datos de peso seco del tratamiento AK83 es:[', np.min(ic_95_datos_AK83), np.max(ic_95_datos_AK83),']')
-print('El intervalo de confianza para los datos de peso seco del tratamiento B401 es:[', np.min(ic_95_datos_B401), np.max(ic_95_datos_B401),']')
-print('El intervalo de confianza para los datos de peso seco del tratamiento SmaAK21 es:[', np.min(ic_95_datos_SmaAK21), np.max(ic_95_datos_SmaAK21),']')
-print('El intervalo de confianza para los datos de peso seco del tratamiento SmaAK83 es:[', np.min(ic_95_datos_SmaAK83), np.max(ic_95_datos_SmaAK83),']')
-print('El intervalo de confianza para los datos de peso seco del tratamiento SmaB401 es:[', np.min(ic_95_datos_SmaB401), np.max(ic_95_datos_SmaB401),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento control es:[', np.min(ic_95_datos_control), np.max(ic_95_datos_control),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento gfp es:[', np.min(ic_95_datos_gfp), np.max(ic_95_datos_gfp),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento AK21 es:[', np.min(ic_95_datos_AK21), np.max(ic_95_datos_AK21),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento AK83 es:[', np.min(ic_95_datos_AK83), np.max(ic_95_datos_AK83),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento B401 es:[', np.min(ic_95_datos_B401), np.max(ic_95_datos_B401),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento SmaAK21 es:[', np.min(ic_95_datos_SmaAK21), np.max(ic_95_datos_SmaAK21),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento SmaAK83 es:[', np.min(ic_95_datos_SmaAK83), np.max(ic_95_datos_SmaAK83),']')
+#print('El intervalo de confianza para los datos de peso seco del tratamiento SmaB401 es:[', np.min(ic_95_datos_SmaB401), np.max(ic_95_datos_SmaB401),']')
 
 '''
 El intervalo de confianza para los datos de peso seco del tratamiento control es:[ 6.930088013333918 8.942639259393355 ]
@@ -267,15 +276,15 @@ print(ss.kruskal(control, gfp, AK21, AK83, B401, SmaAK21, SmaAK83, SmaB401, nan_
 #Dado el valor de pvalue (4e-13), rechazo hipotesis nula y acepto hipotesis alternativas. Existen diferencias significativas entre al menos dos muestras. 
 
 
-control_gfp = ss.mannwhitneyu(lista_control, lista_gfp , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
-control_AK21 = ss.mannwhitneyu(lista_control, lista_AK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
-control_AK83 = ss.mannwhitneyu(lista_control, lista_AK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
-control_B401 = ss.mannwhitneyu(lista_control, lista_B401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
-control_SmaAK21 = ss.mannwhitneyu(lista_control, lista_SmaAK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
-control_SmaAK83 =ss.mannwhitneyu(lista_control, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
-control_SmaB401 =ss.mannwhitneyu(lista_control, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
-#El valor p resultante al comparar el peso seco control vs. peso seco del tratamiento gfp es:  3.608812976421934e-08
+#Para saber cuales de las comparaciones presentan diferencias significativas entre si, realice comparaciones de a pares entre las muestras hasta cubrir todas las combinaciones posibles.
+#Planteo dos hipotesis:
+'''
+-H0: no hay diferencias significativas entre las muestras.
+H1: si hay diferencias significatvias entre las muestras.
+Aquellos casos donde el pvalue sea menor a 0.05, puedo descartar H0 y aceptar H1.
+'''
 
+#FUNCION PARA EVALUAR PVALUE Y GUARDAR AQUELLOS QUE DEN DIFERENCIAS SIGNIFICATIVAS (P-VALUE<0.05).
 comparaciones_significativas = []
 
 def select_variables(variables, lista):
@@ -289,98 +298,72 @@ def select_variables(variables, lista):
         if var_value <= 0.05:
             selected_variables.append((lista[i], var_value))
     
-    #resultados = pd.DataFrame({'Variables': selected_variables})
-    #return resultados
-    
-    #for i, val in enumerate(variables):
-        #if val.pvalue <= 0.05:
-            #selected_variables.append((variables[i], val, lista[i]))
-    
     df = pd.DataFrame(selected_variables, columns=['comparacion', 'pvalue'])
     df.set_index(df.index + 1, inplace=True)  # Ajustar el índice según la posición
     return df
 
 
-a = select_variables([control_gfp, control_AK21, control_AK83, control_B401, control_SmaAK21, control_SmaAK83, control_SmaB401], ['control_gfp', 'control_AK21', 'control_AK83', 'control_B401', 'control_SmaAK21', 'control_SmaAK83', 'control_SmaB401'])
-print(a)
+#COMPARACIONES PAREADAS ENTRE LAS MUESTRAS:
 
+control_gfp = ss.mannwhitneyu(lista_control, lista_gfp , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_AK21 = ss.mannwhitneyu(lista_control, lista_AK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_AK83 = ss.mannwhitneyu(lista_control, lista_AK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_B401 = ss.mannwhitneyu(lista_control, lista_B401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_SmaAK21 = ss.mannwhitneyu(lista_control, lista_SmaAK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_SmaAK83 =ss.mannwhitneyu(lista_control, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+control_SmaB401 =ss.mannwhitneyu(lista_control, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+
+gfp_AK21 = ss.mannwhitneyu(lista_gfp, lista_AK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+gfp_AK83 = ss.mannwhitneyu(lista_gfp, lista_AK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+gfp_B401 = ss.mannwhitneyu(lista_gfp, lista_B401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+gfp_SmaAK21 = ss.mannwhitneyu(lista_gfp, lista_SmaAK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+gfp_SmaAK83 = ss.mannwhitneyu(lista_gfp, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+gfp_SmaB401 = ss.mannwhitneyu(lista_gfp, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+
+AK21_AK83 = ss.mannwhitneyu(lista_AK21, lista_AK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+AK21_B401 = ss.mannwhitneyu(lista_AK21, lista_B401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+AK21_SmaAK21= ss.mannwhitneyu(lista_AK21, lista_SmaAK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+AK21_SmaAK83= ss.mannwhitneyu(lista_AK21, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+AK21_SmaB401 = ss.mannwhitneyu(lista_AK21, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+
+AK83_B401 =  ss.mannwhitneyu(lista_AK83, lista_B401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+AK83_SmaAK21 = ss.mannwhitneyu(lista_AK83, lista_SmaAK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+AK83_SmaAK83 = ss.mannwhitneyu(lista_AK83, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+AK83_SmaB401 = ss.mannwhitneyu(lista_AK83, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+
+B401_SmaAK21 = ss.mannwhitneyu(lista_B401, lista_SmaAK21 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+B401_SmaAK83 = ss.mannwhitneyu(lista_B401, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+B401_SmaB401 = ss.mannwhitneyu(lista_B401, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+
+SmaAK21_SmaAK83 = ss.mannwhitneyu(lista_SmaAK21, lista_SmaAK83 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+SmaAK21_SmaB401 = ss.mannwhitneyu(lista_SmaAK21, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+SmaAK83_SmaB401= ss.mannwhitneyu(lista_SmaAK83, lista_SmaB401 , use_continuity=True, alternative='two-sided', axis=0, method='auto', nan_policy='propagate', keepdims=False)
+
+
+total = select_variables([control_gfp, control_AK21, control_AK83, control_B401, control_SmaAK21, control_SmaAK83, control_SmaB401, gfp_AK21, gfp_AK83, gfp_B401, gfp_SmaAK21, gfp_SmaAK83, gfp_SmaB401, AK21_AK83, AK21_B401, AK21_SmaAK21, AK21_SmaAK83, AK21_SmaB401, AK83_B401, AK83_SmaAK21, AK83_SmaAK83, AK83_SmaB401, B401_SmaAK21, B401_SmaAK83, B401_SmaB401, SmaAK21_SmaAK83, SmaAK21_SmaB401, SmaAK83_SmaB401], 
+                         ['control_gfp', 'control_AK21', 'control_AK83', 'control_B401', 'control_SmaAK21', 'control_SmaAK83', 'control_SmaB401', 'gfp_AK21', 'gfp_AK83', 'gfp_B401', 'gfp_SmaAK21', 'gfp_SmaAK83', 'gfp_SmaB401', 'AK21_AK83', 'AK21_B401', 'AK21_SmaAK21', 'AK21_SmaAK83', 'AK21_SmaB401', 'AK83_B401', 'AK83_SmaAK21', 'AK83_SmaAK83', 'AK83_SmaB401', 'B401_SmaAK21', 'B401_SmaAK83', 'B401_SmaB401','SmaAK21_SmaAK83', 'SmaAK21_SmaB401', 'SmaAK83_SmaB401'])
+print(total)
 
 '''
 comparacion        pvalue
-1      control_gfp  3.608813e-08
-2     control_AK21  6.836416e-09
-3     control_AK83  2.179180e-08
-4     control_B401  1.282650e-08
-5  control_SmaAK21  7.859956e-08
-6  control_SmaAK83  1.411337e-06
-7  control_SmaB401  1.324495e-06
+1       control_gfp  3.608813e-08
+2      control_AK21  6.836416e-09
+3      control_AK83  2.179180e-08
+4      control_B401  1.282650e-08
+5   control_SmaAK21  7.859956e-08
+6   control_SmaAK83  1.411337e-06
+7   control_SmaB401  1.324495e-06
+8          gfp_AK83  1.121968e-05
+9          gfp_B401  3.605200e-02
+10        AK21_AK83  6.600991e-05
+11        AK83_B401  8.054759e-03
+12     AK83_SmaAK21  9.171183e-03
+13     AK83_SmaAK83  1.796990e-02
+14     AK83_SmaB401  3.735680e-05
+15     B401_SmaB401  1.249955e-02
 '''
 
-print("El valor p resultante al comparar el peso seco control vs. peso seco del tratamiento gfp es: ",control_gfp.pvalue)
 
-
-
-
-
-result_tukey = ss.tukey_hsd(lista_control, lista_gfp, lista_AK21, lista_AK83, lista_B401, lista_SmaAK21, lista_SmaAK83, lista_SmaB401)
-#Deberia hacer un test para identificar cuales son las diferencias entre cada
-'''Comparison  Statistic  p-value  Lower CI  Upper CI
- (0 - 1)    -30.776     0.000   -49.767   -11.785    #hay diferencias
- (0 - 2)    -27.693     0.000   -46.684    -8.702    #hay diferencias
- (0 - 3)    -11.418     0.590   -30.409     7.573    
- (0 - 4)    -21.338     0.018   -40.525    -2.150    #hay diferencias
- (0 - 5)    -27.275     0.002   -47.724    -6.826    #hay diferencias
- (0 - 6)    -37.602     0.000   -57.231   -17.972    #hay diferencias
- (0 - 7)    -37.695     0.000   -57.095   -18.296    #hay diferncias
- (1 - 0)     30.776     0.000    11.785    49.767    #hay diferencias
- (1 - 2)      3.083     1.000   -15.491    21.657    
- (1 - 3)     19.358     0.034     0.784    37.932    #hay diferencias
- (1 - 4)      9.439     0.783    -9.336    28.213    
- (1 - 5)      3.501     0.999   -16.561    23.563
- (1 - 6)     -6.826     0.958   -26.051    12.400
- (1 - 7)     -6.919     0.952   -25.911    12.072
- (2 - 0)     27.693     0.000     8.702    46.684    #hay diferencias
- (2 - 1)     -3.083     1.000   -21.657    15.491    
- (2 - 3)     16.275     0.133    -2.299    34.849
- (2 - 4)      6.355     0.968   -12.419    25.130
- (2 - 5)      0.418     1.000   -19.644    20.480
- (2 - 6)     -9.909     0.761   -29.135     9.317
- (2 - 7)    -10.003     0.740   -28.994     8.989
- (3 - 0)     11.418     0.590    -7.573    30.409
- (3 - 1)    -19.358     0.034   -37.932    -0.784   #hay diferencias
- (3 - 2)    -16.275     0.133   -34.849     2.299   
- (3 - 4)     -9.920     0.737   -28.694     8.855
- (3 - 5)    -15.857     0.236   -35.919     4.205
- (3 - 6)    -26.184     0.001   -45.410    -6.958   #hay diferencias
- (3 - 7)    -26.278     0.001   -45.269    -7.286   #hay diferencias
- (4 - 0)     21.338     0.018     2.150    40.525   #hay diferencias
- (4 - 1)     -9.439     0.783   -28.213     9.336
- (4 - 2)     -6.355     0.968   -25.130    12.419
- (4 - 3)      9.920     0.737    -8.855    28.694
- (4 - 5)     -5.937     0.986   -26.185    14.311
- (4 - 6)    -16.264     0.174   -35.684     3.156
- (4 - 7)    -16.358     0.157   -35.546     2.830
- (5 - 0)     27.275     0.002     6.826    47.724    #hay diferencias
- (5 - 1)     -3.501     0.999   -23.563    16.561
- (5 - 2)     -0.418     1.000   -20.480    19.644
- (5 - 3)     15.857     0.236    -4.205    35.919
- (5 - 4)      5.937     0.986   -14.311    26.185
- (5 - 6)    -10.327     0.788   -30.994    10.340
- (5 - 7)    -10.421     0.771   -30.870    10.028
- (6 - 0)     37.602     0.000    17.972    57.231    #hay diferencias
- (6 - 1)      6.826     0.958   -12.400    26.051
- (6 - 2)      9.909     0.761    -9.317    29.135
- (6 - 3)     26.184     0.001     6.958    45.410    #hay diferencias
- (6 - 4)     16.264     0.174    -3.156    35.684
- (6 - 5)     10.327     0.788   -10.340    30.994
- (6 - 7)     -0.094     1.000   -19.723    19.536
- (7 - 0)     37.695     0.000    18.296    57.095    #hay diferencias
- (7 - 1)      6.919     0.952   -12.072    25.911
- (7 - 2)     10.003     0.740    -8.989    28.994
- (7 - 3)     26.278     0.001     7.286    45.269    #hay diferencias
- (7 - 4)     16.358     0.157    -2.830    35.546
- (7 - 5)     10.421     0.771   -10.028    30.870
- (7 - 6)      0.094     1.000   -19.536    19.723'''
 
 #%%Realizar un análisis de dependencia de variables categóricas.
 
