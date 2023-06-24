@@ -327,15 +327,15 @@ comparacion        pvalue
 #H0: Las variables son independientes.
 #H1: las variables no son independientes, es decir, hay relacion entre ellas.
 
-#CONVERSION DE LOS DATOS NUMERICOS DE PESO SECO A DATOS CATEGORICOS, CON PUNTO DE CORTE DE 15MG/PLANTA.
+#CONVERSION DE LOS DATOS NUMERICOS DE PESO SECO A DATOS CATEGORICOS, CON PUNTO DE CORTE DE 25MG/PLANTA.
 datos_final_peso = list(datos_final['Peso seco'])
 lista_2 =[]
 
 for datos in datos_final_peso:
-    if datos >= 15.0:
+    if datos >= 25.0:
         #print('si')
         lista_2.append('Alto')
-    if datos <= 15.0:
+    if datos <= 25.0:
         #print('no')
         lista_2.append('Bajo')
 
@@ -355,15 +355,15 @@ groups = df2.groupby([a,b]).count()
 print (groups)
 
 '''Peso seco categorico  Estante
-False                 False      21
-                      True       23
-True                  False      75
-                      True       59'''
+False                 False      42
+                      True       44
+True                  False      54
+                      True       38'''
 
 
 print(ss.chisquare(groups, ddof=0, axis=0))
-#Power_divergenceResult(statistic=102.53932584269663, pvalue=4.420065487234606e-22)
-#Dado que el p value es menor a 0.05, puedo rechazar H0 y aceptar que las variables no son independientes.
+#Power_divergenceResult(statistic=3.1235955056179776, pvalue=0.3729589447466447)
+#Dado que el p value es mayor a 0.05, acepto H0 es decir que las variables son independientes.
 
 
 #%% EVALUACION DE CORRELACION LINEAL ENTRE DOS VARIABLES.

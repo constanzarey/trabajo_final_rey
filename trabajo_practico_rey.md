@@ -4,13 +4,13 @@
 ***Estudiante: Constanza Rey***
 
 ### Marco teórico 
-En el marco del presente curso, presento el trabajo practico final donde utilice las herramientas vistas para analizar los datos obtenidos en el marco de mi tesis doctoral. El mismo se centra en el estudio de una especie de rizobio (***Sinorhizobium meliloti***) y su par simbionte (alfalfa, ***Medicago sativa***). Se sabe que todas las cepas de ***S. meliloti*** presentan siempre al menos tres replicones grandes: un cromosoma y dos megaplasmidos tipo pSyms (pSymA y pSymB) y que el pSymA es uno de los mas variables entre cepas. Para poder determinar que genes son los que aportan la diversidad genetica a las cepas de este rizobio, nos propusimos estudiar los pSymAs de varias cepas de ***S. meliloti***.  Con ese fin, contruimos cepas hibridas de ***S. meliloti*** que contienen el mismo contexto genomico y cada uno de los pSymA, correspondientes a cada cepa. Las cepas hibridas generadas se nombran como: Sma(pSymA de cepa correspondiente), siendo por ejemplo la cepa hibrida con el pSymA AK21: Sma(AK21).
+En el marco del presente curso, presento el trabajo practico final donde utilice las herramientas vistas para analizar los datos obtenidos en el marco de mi tesis doctoral. El mismo se centra en el estudio de una especie de rizobio (***Sinorhizobium meliloti***) y su par simbionte (alfalfa, ***Medicago sativa***). Se sabe que todas las cepas de ***S. meliloti*** presentan siempre al menos tres replicones grandes: un cromosoma y dos megaplasmidos tipo pSyms (pSymA y pSymB) y que el pSymA es uno de los mas variables entre cepas. Para poder determinar que genes son los que aportan la diversidad genetica a las cepas de este rizobio, nos propusimos estudiar los pSymAs de varias cepas de ***S. meliloti***.  Con ese fin, contruimos cepas hibridas de ***S. meliloti*** que comparten el mismo contexto genomico excepto cada uno de los pSymA, correspondientes a cada cepa. Las cepas hibridas generadas se nombran como: Sma(pSymA de cepa correspondiente), siendo por ejemplo la cepa hibrida con el pSymA AK21: Sma(AK21).
 
 
 ### Diseño y metodologia del experimento
 Uno de los aspectos a evaluar para los hibridos obtenidos fue la eficiencia simbiotica. 
-Con ese fin, diseñe un ensayo en alfalfa inoculando con las cepas a evaluar y utilizando 12 plantas por condicion. Cada set de plantas fue sometida a la inoculacion con una determinada cepa (excepto el control). Las cepas utilizadas fueron 2011GFP, que funciona como un control positivo, tres cepas diferentes (AK21, AK83 y B401) y los tres respectivos hibridos de cada cepa (SmaAK21, SmaAK83, SmaB401). Luego de un mes y medio, se obtiene la parte aerea de las plantas y cada una se coloca en sobres para dejarlas en estufa a 65°C durante una semana. Finalmente, se registraron los pesos obtenidos en una balanza analitica.
-Ademas, dado que en la camara de plantas observamos diferencias al crecer las plantas en un estante u otro, se registraron los estantes en el que colocamos cada una de las plantas. Nos aseguramos de que por estante haya al menos 12 plantas por condicion.
+Con ese fin, diseñe un ensayo en alfalfa inoculando con las cepas a evaluar y utilizando 12 plantas por condicion. Cada set de plantas fue sometida a la inoculacion con una determinada cepa (excepto el control). Las cepas utilizadas fueron 2011GFP, que funciona como un control positivo, tres cepas diferentes (AK21, AK83 y B401) y los tres respectivos hibridos de cada cepa (SmaAK21, SmaAK83, SmaB401). Luego de un mes y medio, se obtiene la parte aerea de las plantas y cada una se coloca en sobres para dejarlas en estufa a 65°C durante una semana. Finalmente, se registraron los pesos obtenidos en una balanza analitica (peso seco).
+Además, dado que en la camara de plantas observamos diferencias al crecer las plantas en un estante u otro, se registraron los estantes en el que colocamos cada una de las plantas. Nos aseguramos de que por estante haya al menos 12 plantas por condicion.
 
 
 El dataset final consiste en una tabla con las siguientes columnas:
@@ -185,7 +185,7 @@ El resultado obtenido fue:
 
 ### **Segun el p-value (4e-13) menor a 0.05, rechazo H0 y acepto H1, es decir que existen diferencias significativas entre al menos 2 muestras**
 
-Para saber cuales son las comparaciones que presentan diferencias significativas, utilice un test no parametrico de Mann-Whitney. Con ese fin, compare de a pares en todas las combinaciones posibles los pesos secos correspondientes a los distintos tratamientos, para determinar cuales son los que presentan diferencias significativas.
+Para saber cuales son las comparaciones que presentan diferencias significativas, utilice un test no parametrico de Mann-Whitney. Con ese fin, compare de a pares en todas las combinaciones posibles los pesos secos correspondientes a los distintos tratamientos.
 Planteo asi, dos hipotesis utilizadas para las comparaciones:
 - H0: no hay diferencias significativas entre las muestras.
 - H1: hay diferencias significativas entre las muestras.
@@ -220,15 +220,18 @@ comparacion        pvalue
 '''
 ```
 
-En la tabla, se observan cuales son las comparaciones que presentan diferencias significativas entre si.
-
-
+En la tabla, se observan cuales son las comparaciones que presentan diferencias significativas entre si. Es decir, habria diferencias significativas entre:
+- Control y todas las muestras (lo cual era esperable dado que no hubo contaminacion).
+- 2011GFP con AK83 y B401.
+- AK21 con AK83.
+- AK83 con B401, SmaAK21, SmaAK83 y SmaB401.
+- B401 con SmaB401 (esto es interesante dado que parece ser que la cepa wt presenta un fenotipo simbiotico diferente a la cepa hibrida).
 
 ## Analisis de dependencia de variables categoricas.
 
 Para comparar dos tipos de datos, construi una tabla de contingencia. Los datos a comparar fueron los siguientes:
 
-- Variable 1: peso seco expresado en mg/planta. Fueron convertidos a datos categoricos utilizando un punto de corte (mayor a 15 mg/planta: 'Alto', menor a 15mg/planta: 'Bajo').
+- Variable 1: peso seco expresado en mg/planta. Fueron convertidos a datos categoricos utilizando un punto de corte (mayor a 25mg/planta: 'Alto', menor a 25mg/planta: 'Bajo'). Ese valor representa en general un peso seco alto.
 - Variable 2: estante donde se ubicaron las plantas. Las opciones posibles son: 'Estante1' o 'Estante2'.
 
 Entonces, para comprobar si existe una relacion entre la variable 1: 'Peso seco' y la variable 2: 'Estante', plantie dos hipotesis:
@@ -251,10 +254,10 @@ El script utilizado fue el siguiente:
 El resultado obtenido fue el siguiente:
 ```python
 Peso seco categorico  Estante
-False                 False      21
-                      True       23
-True                  False      75
-                      True       59
+False                 False      42
+                      True       44
+True                  False      54
+                      True       38
 ```
 
 Finalmente, utilice el test estadistico de chi-cuadrado para determinar asociacion entre las dos variables categoricas partiendo de la tabla de contingencia.
@@ -263,12 +266,12 @@ Finalmente, utilice el test estadistico de chi-cuadrado para determinar asociaci
 ss.chisquare(groups, ddof=0, axis=0)
 ```
 
-El resultado obtenido fue: Power_divergenceResult(statistic=102.53932584269663, pvalue=4.420065487234606e-22). El p-value menor a 0.05, indica que rechazo H0 y acepto H1, es decir que **existe relacion entre la variable Estante y la variable Peso seco**.
+El resultado obtenido fue: Power_divergenceResult(statistic=3.1235955056179776, pvalue=0.3729589447466447). El p-value mmayor a 0.05, indica que acepto H0, es decir que **no existe relacion entre la variable Estante y la variable Peso seco**.
 
 
 ## Analisis de correlacion entre dos variables.
 
-Para realizar este punto del trabajo, utilice un dataset distinto al anterior. En este caso, la tabla cuenta con dos variables a analizar:
+Para realizar este punto del trabajo, utilice un dataset distinto al anterior. En este caso, la tabla cuenta con dos variables continuas a analizar:
 
 - Peso seco de plantas expresado en mg/planta. Estos resultados fueron obtenidos para plantas inoculadas solo con la cepa 2011GFP.
 - Promedio de peso fresco de nodulos por planta.
@@ -282,7 +285,7 @@ Inicialmente, realice un histograma para cada tipo de datos para observar como s
      height=auto />
 
 
-En la figura, se observa que los datos de peso seco podrian distribuirse normalmente, pero no seria asi para los datos promedio de los pesos fresco de los nodulos. Aun asi, realice un contraste de hipotesis para verificar la distribucion normal de los datos.
+En la figura, se observa que los datos de peso seco podrian distribuirse normalmente, pero no seria asi para los datos promedio de los pesos fresco de los nodulos. Aun asi, realice un contraste de hipotesis para verificar si la distribucion de los datos es normal.
 
 ```python
 #Planteo hipotesis para ver si se cumple normalidad para los dos tipos de datos:
@@ -296,14 +299,17 @@ print(ss.normaltest(peso_nodulos_correlacion, axis=0, nan_policy='propagate'))
 #NormaltestResult(statistic=32.788994682394886, pvalue=7.585081842245872e-08)
 ```
 
-Segun los resultados obtenidos, ninguno de los dos tipos de datos se distribuye normalmente. Por lo tanto, utilice un test no parametrico para evaluar si las dos variables continuas se correlacionan linealmente. El test utilizado fue **test de correlacion de Spearman**.
+Segun los resultados obtenidos, ninguno de los dos tipos de datos se distribuye normalmente. Por lo tanto, utilice un test no parametrico para evaluar si las dos variables continuas se correlacionan linealmente. El test utilizado fue **test de correlacion de Spearman**, el cual permite medir la relación entre dos variables, en casos donde no se cumple la distribucion normal de los datos.
+A continuacion se muestra el script con el resultado obtenido.
 
 ```python
 ss.spearmanr(peso_seco_correlacion, peso_nodulos_correlacion)
 #SignificanceResult(statistic=0.15548804084084852, pvalue=0.4681458596212671)
 ```
 
-Segun estos resultados, ***ambos tipos de datos no estarian correlacionados***, dado que el estadistico de spearman dio un valor cercano a cero.
+El valor del estadistico indica el coeficiente de correlación de Spearman, el cual vale  -1 cuando existe correlacion negativa, 0 indica ausencia de correlación, y 1 indica una correlación positiva perfecta.
+
+Segun estos resultados, ***ambos tipos de datos no estarian correlacionados***, dado que el estadistico de spearman dio un valor cercano a cero (0.155).
 
 
 
