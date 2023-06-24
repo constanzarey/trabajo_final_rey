@@ -266,7 +266,7 @@ Finalmente, utilice el test estadistico de chi-cuadrado para determinar asociaci
 ss.chisquare(groups, ddof=0, axis=0)
 ```
 
-El resultado obtenido fue: Power_divergenceResult(statistic=3.1235955056179776, pvalue=0.3729589447466447). El p-value mmayor a 0.05, indica que acepto H0, es decir que **no existe relacion entre la variable Estante y la variable Peso seco**.
+El resultado obtenido fue: Power_divergenceResult(statistic=3.1235955056179776, pvalue=0.3729589447466447). El p-value smayor a 0.05, indica que acepto H0, es decir que **no existe relacion entre la variable Estante y la variable Peso seco**.
 
 
 ## Analisis de correlacion entre dos variables.
